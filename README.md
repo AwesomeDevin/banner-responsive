@@ -1,5 +1,5 @@
 # banner-responsive
-The perfect adaptive banner solution based on [image-color-utils](https://github.com/AwesomeDevin/ImageColorUtils), Ensure that the banner is fully visible 
+The perfect adaptive banner solution based on [image-color-utils](https://github.com/AwesomeDevin/ImageColorUtils), Make our banner adaptive to width and height, Ensure that the banner is fully visible 
 
 
 | Genaral Banner Effect | Responsive Banner Effect | Responsive basis
