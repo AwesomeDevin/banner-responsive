@@ -238,6 +238,8 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
 
       let startColor, endColor
 
+      const basic = isVertical ? bannerHeight : bannerWidth
+
       if(startGradientValues && endGradientValues && startRGB && endRGB){
         startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
           startGradientValues[0]
@@ -247,7 +249,7 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
 
         endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${
           endGradientValues[1]
-        }px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth +
+        }px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${basic +
           100}px`
       } else if(startGradientValues && startRGB){
         startColor =  `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
@@ -260,7 +262,7 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
           endRGB
         }, 0.1) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(
           endRGB,
-        )} ${bannerWidth + 100}px`
+        )} ${basic + 100}px`
       }
 
       return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''}), url(${img})`;
