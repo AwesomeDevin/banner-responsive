@@ -7,6 +7,7 @@ const defineConfig = require('rolldown').defineConfig;
 
 module.exports = defineConfig({
   input: './src/index.tsx',
+  external: ['react', 'react-dom', 'react/jsx-runtime'],
   output: [
     {
       dir: 'build/es',
