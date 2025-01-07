@@ -16,7 +16,7 @@
     "build"
   ],
   "dependencies": {
-    "@banner-responsive/sdk": "1.0.3",
+    "@banner-responsive/sdk": "workspace:*",
     "image-color-utils": "^1.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
