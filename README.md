@@ -10,3 +10,6 @@ The perfect adaptive banner solution based on [image-color-utils](https://github
 
 
 [Online DEMO](https://good-responsive-banner.netlify.app/#/src/README.md)
+
+![image](https://github.com/user-attachments/assets/794c94f7-b756-428d-8166-24bd02bd7253)
+
