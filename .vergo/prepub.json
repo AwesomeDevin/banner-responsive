@@ -42,7 +42,9 @@
         "/packages/sdk/src/index.ts",
         "/packages/sdk/tsconfig.json"
       ],
-      "isDependOn": []
+      "isDependOn": [
+        "@banner-responsive/react"
+      ]
     }
   ]
 }
