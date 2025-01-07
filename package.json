@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rolldown -c"
+    "update-build": "vergo build",
+    "build": "pnpm --filter @banner-responsive/react --filter @banner-responsive/sdk run build",
+    "pub": "vergo run && pnpm -r  --parallel pub",
+    "pre-pub": "vergo run -b && pnpm -r  --parallel pub"
+
   },
   "repository": {
     "type": "git",
