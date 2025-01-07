@@ -34,11 +34,12 @@ export interface ResponsiveBannerProps {
   backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right';
   style?: React.CSSProperties;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export default function ResponsiveBanner(props: ResponsiveBannerProps) {
 
-  const { width = '100%' , height = '100%', img, backgroundPosition = 'center', style, className } = props;
+  const { width = '100%' , height = '100%', img, backgroundPosition = 'center', style, className, children } = props;
 
   const conRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(0);
@@ -426,5 +427,6 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
           
         </>
       )}
+      {children}
   </div>
 }
