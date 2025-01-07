@@ -6,7 +6,7 @@ const defineConfig = require('rolldown').defineConfig;
 
 
 module.exports = defineConfig({
-  input: './src/index.ts',
+  input: './src/index.tsx',
   output: [
     {
       dir: 'build/es',

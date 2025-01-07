@@ -8,8 +8,7 @@
         "/packages/react/package.json",
         "/packages/react/rolldown.config.js",
         "/packages/react/src/README.md",
-        "/packages/react/src/banner.tsx",
-        "/packages/react/src/index.ts",
+        "/packages/react/src/index.tsx",
         "/packages/react/tsconfig.json",
         "/packages/react/vite.config.js"
       ],
