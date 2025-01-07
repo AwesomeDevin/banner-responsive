@@ -2,8 +2,8 @@
   "name": "@banner-responsive/sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "typings": "index.d.ts",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "rolldown -c",

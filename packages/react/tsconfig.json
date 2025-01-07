@@ -21,7 +21,7 @@
     "traceResolution": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "declarationDir": "build/typings",
+    "outDir": "build/typings",
   },
   "include": ["src"]
 }

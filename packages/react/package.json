@@ -6,7 +6,7 @@
   "module": "build/es/index.js",
   "typings": "build/typings/index.d.ts",
   "scripts": {
-    "build": "rolldown -c && tsc",
+    "build": "rolldown -c && tsc --emitDeclarationOnly",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitdoc",
     "docs:build": "vitdoc build"
