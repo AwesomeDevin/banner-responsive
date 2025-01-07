@@ -28,10 +28,10 @@ const debounce = (fn: Function, delay: number) => {
 }
 
 export interface ResponsiveBannerProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   img: string;
-  backgroundPosition: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right';
   style?: React.CSSProperties;
   className?: string;
 }
