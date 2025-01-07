@@ -1,6 +1,6 @@
 import { getMainColor } from "@banner-responsive/sdk";
 import { isDeepColorByHsv, rgb2hsv } from "image-color-utils";
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
   // 用于计算渐变的偏移量
 const offsetValues = [2, 20, 120];
@@ -37,7 +37,7 @@ export interface ResponsiveBannerProps {
   children?: React.ReactNode;
 }
 
-export default function ResponsiveBanner(props: ResponsiveBannerProps) {
+function ResponsiveBanner(props: ResponsiveBannerProps) {
 
   const { width = '100%' , height = '100%', img, backgroundPosition = 'center', style, className, children } = props;
 
@@ -432,3 +432,6 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
       {children}
   </div>
 }
+
+
+export default memo(ResponsiveBanner);
