@@ -28,10 +28,10 @@ const debounce = (fn: Function, delay: number) => {
 }
 
 export interface ResponsiveBannerProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   img: string;
-  backgroundPosition: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right';
   style?: React.CSSProperties;
   className?: string;
 }
@@ -240,24 +240,24 @@ export default function ResponsiveBanner(props: ResponsiveBannerProps) {
       if(startGradientValues && endGradientValues && startRGB && endRGB){
         startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
           startGradientValues[0]
-        }px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${
+        }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${
           startGradientValues[2]
         }px`
 
-        endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${
+        endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${
           endGradientValues[1]
         }px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth +
           100}px`
       } else if(startGradientValues && startRGB){
         startColor =  `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
           startGradientValues[0]
-        }px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${
+        }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${
           startGradientValues[2]
         }px`
       }else if(endGradientValues && endRGB){
         startColor = `transparent ${endGradientValues[0]}px, rgba(${
           endRGB
-        }, 0.45) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(
+        }, 0.1) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(
           endRGB,
         )} ${bannerWidth + 100}px`
       }
