@@ -7,7 +7,7 @@ import typescript from 'rollup-plugin-typescript2';
 export default defineConfig({
   input: './src/index.js',
   output: {
-    file: 'dist/index.js',
+    dir: 'build',
   },
   plugins: [typescript({
     // tsconfigDefaults: defaults,
