@@ -9,4 +9,4 @@ The perfect adaptive banner solution based on [image-color-utils](https://github
 | ![image](https://github.com/user-attachments/assets/da552562-40d6-4702-bd1e-0cb354bcc1f7) | ![image](https://github.com/user-attachments/assets/10ec6930-158c-4aff-8054-5ea656250a50) |  container width too small |
 
 
-
+[Online DEMO](https://677ccaf22149e8f804d6291a--good-responsive-banner.netlify.app/#/src/README.md)
