@@ -4,28 +4,9 @@
       "name": "@banner-responsive/react",
       "relativeDir": "/packages/react",
       "diffFiles": [
-        "/packages/react/README.md",
-        "/packages/react/package.json",
-        "/packages/react/rolldown.config.js",
-        "/packages/react/src/README.md",
-        "/packages/react/src/index.tsx",
-        "/packages/react/tsconfig.json",
-        "/packages/react/vite.config.js"
+        "/packages/react/src/index.tsx"
       ],
       "isDependOn": []
-    },
-    {
-      "name": "@banner-responsive/sdk",
-      "relativeDir": "/packages/sdk",
-      "diffFiles": [
-        "/packages/sdk/package.json",
-        "/packages/sdk/rolldown.config.js",
-        "/packages/sdk/src/index.ts",
-        "/packages/sdk/tsconfig.json"
-      ],
-      "isDependOn": [
-        "@banner-responsive/react"
-      ]
     }
   ]
 }
