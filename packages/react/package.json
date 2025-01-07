@@ -2,11 +2,11 @@
   "name": "@banner-responsive/react",
   "version": "1.0.0",
   "description": "The perfect adaptive banner solution, Make our banner adaptive to width and height, Ensure that the banner is fully visible Genaral Banner Effect",
-  "main": "build/index.js",
-  "typings": "build/index.d.ts",
-  "type": "module",
+  "main": "build/cjs/index.js",
+  "module": "build/es/index.js",
+  "typings": "build/typings/index.d.ts",
   "scripts": {
-    "build": "rolldown -c",
+    "build": "rolldown -c && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitdoc",
     "docs:build": "vitdoc build"

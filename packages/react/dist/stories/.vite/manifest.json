@@ -1,17 +1,11 @@
 {
-  "../../../../../src/index.tsx.type": {
-    "file": "assets/index.tsx-C6ZuzoMc.js",
-    "name": "index.tsx",
-    "src": "../../../../../src/index.tsx.type",
-    "isDynamicEntry": true
-  },
   "../../node_modules/.pnpm/@vitdoc+runtime@1.6.3_@babel+core@7.26.0_@babel+template@7.25.9_@types+react@19.0.0_react-dom_fvznmpfnl4ojir6im5tt532fgi/node_modules/@vitdoc/runtime/dist/index.js": {
-    "file": "assets/index-CIg-HHmE.js",
+    "file": "assets/index-q_cH_epb.js",
     "name": "index",
     "src": "../../node_modules/.pnpm/@vitdoc+runtime@1.6.3_@babel+core@7.26.0_@babel+template@7.25.9_@types+react@19.0.0_react-dom_fvznmpfnl4ojir6im5tt532fgi/node_modules/@vitdoc/runtime/dist/index.js",
     "isDynamicEntry": true,
     "imports": [
-      "_index2-DzfQUOiK.js",
+      "_index2-D2jTFKj3.js",
       "index.html"
     ],
     "css": [
@@ -24,19 +18,19 @@
     "src": "../../node_modules/.pnpm/vitdoc@1.8.10_@babel+core@7.26.0_@babel+template@7.25.9_@swc+helpers@0.5.1_@types+react@19.0._iqdyecgo447db35kpr7nm5il4i/node_modules/vitdoc/client/hmr.ts",
     "isDynamicEntry": true
   },
-  "_index-8C3GwkxZ.js": {
-    "file": "assets/index-8C3GwkxZ.js",
-    "name": "index",
+  "_banner-Cc9uFlxW.js": {
+    "file": "assets/banner-Cc9uFlxW.js",
+    "name": "banner",
     "imports": [
-      "_index2-DzfQUOiK.js"
+      "_index2-D2jTFKj3.js"
     ]
   },
-  "_index2-!~{00a}~.js": {
+  "_index2-!~{00b}~.js": {
     "file": "assets/B4Ixr1Fe.css",
-    "src": "_index2-!~{00a}~.js"
+    "src": "_index2-!~{00b}~.js"
   },
-  "_index2-DzfQUOiK.js": {
-    "file": "assets/index2-DzfQUOiK.js",
+  "_index2-D2jTFKj3.js": {
+    "file": "assets/index2-D2jTFKj3.js",
     "name": "index2",
     "imports": [
       "index.html"
@@ -49,7 +43,7 @@
     ]
   },
   "index.html": {
-    "file": "assets/index-Bbou5AMY.js",
+    "file": "assets/index-fOyM_DRQ.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -61,7 +55,7 @@
     ]
   },
   "package.json": {
-    "file": "assets/package-BvY9t32B.js",
+    "file": "assets/package-DnjvvQmY.js",
     "name": "package",
     "src": "package.json",
     "isDynamicEntry": true
@@ -73,54 +67,79 @@
     "isDynamicEntry": true
   },
   "src/README.md": {
-    "file": "assets/README-13GSP2ZH.js",
+    "file": "assets/README-C5DgYh9J.js",
     "name": "README",
     "src": "src/README.md",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_index2-DzfQUOiK.js"
+      "_index2-D2jTFKj3.js"
     ],
     "dynamicImports": [
       "src/README.md?markdown-proxy&id=src-readme-demo-0",
       "src/README.md?markdown-proxy&id=src-readme-demo-1",
       "src/README.md?markdown-proxy&id=src-readme-demo-2",
+      "src/README.md?markdown-proxy&id=src-readme-demo-3",
+      "src/README.md?markdown-proxy&id=src-readme-demo-4",
       "src/README.md?markdown-proxy&id=src-readme-demo-0",
       "src/README.md?markdown-proxy&id=src-readme-demo-1",
       "src/README.md?markdown-proxy&id=src-readme-demo-2",
-      "../../../../../src/index.tsx.type"
+      "src/README.md?markdown-proxy&id=src-readme-demo-3",
+      "src/README.md?markdown-proxy&id=src-readme-demo-4"
     ]
   },
   "src/README.md?markdown-proxy&id=src-readme-demo-0": {
-    "file": "assets/README-DInM0oLX.js",
+    "file": "assets/README-DkpbyF61.js",
     "name": "README",
     "src": "src/README.md?markdown-proxy&id=src-readme-demo-0",
     "isDynamicEntry": true,
     "imports": [
-      "_index-8C3GwkxZ.js",
-      "_index2-DzfQUOiK.js",
+      "_banner-Cc9uFlxW.js",
+      "_index2-D2jTFKj3.js",
       "index.html"
     ]
   },
   "src/README.md?markdown-proxy&id=src-readme-demo-1": {
-    "file": "assets/README-CQ-vIDcw.js",
+    "file": "assets/README-CSSOdySc.js",
     "name": "README",
     "src": "src/README.md?markdown-proxy&id=src-readme-demo-1",
     "isDynamicEntry": true,
     "imports": [
-      "_index-8C3GwkxZ.js",
-      "_index2-DzfQUOiK.js",
+      "_banner-Cc9uFlxW.js",
+      "_index2-D2jTFKj3.js",
       "index.html"
     ]
   },
   "src/README.md?markdown-proxy&id=src-readme-demo-2": {
-    "file": "assets/README-I4x3Ku_x.js",
+    "file": "assets/README-DNryFYju.js",
     "name": "README",
     "src": "src/README.md?markdown-proxy&id=src-readme-demo-2",
     "isDynamicEntry": true,
     "imports": [
-      "_index-8C3GwkxZ.js",
-      "_index2-DzfQUOiK.js",
+      "_banner-Cc9uFlxW.js",
+      "_index2-D2jTFKj3.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-3": {
+    "file": "assets/README-B3s0msqw.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-3",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-Cc9uFlxW.js",
+      "_index2-D2jTFKj3.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-4": {
+    "file": "assets/README-_lwU8RHc.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-4",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-Cc9uFlxW.js",
+      "_index2-D2jTFKj3.js",
       "index.html"
     ]
   }

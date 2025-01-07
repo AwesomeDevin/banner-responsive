@@ -25,7 +25,8 @@
     "react-refresh": "^0.16.0",
     "rolldown": "1.0.0-beta.1-commit.82b4e30",
     "rollup-plugin-typescript2": "^0.36.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "vergo": "0.0.1-beta.46"
   },
   "author": "AwesomeDevin",
   "license": "MIT",

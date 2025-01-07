@@ -6,8 +6,17 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __esm = (fn, res) => function() {
+	return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
 var __commonJS = (cb, mod) => function() {
 	return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __export = (target, all) => {
+	for (var name in all) __defProp(target, name, {
+		get: all[name],
+		enumerable: true
+	});
 };
 var __copyProps = (to, from, except, desc) => {
 	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
@@ -23,17 +32,473 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 	value: mod,
 	enumerable: true
 }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 //#endregion
 //#region ../sdk/dist/index.js
-(function(l, r) {
-	if (!l || l.getElementById("livereloadscript")) return;
-	r = l.createElement("script");
-	r.async = 1;
-	r.src = "//" + (self.location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=1";
-	r.id = "livereloadscript";
-	l.getElementsByTagName("head")[0].appendChild(r);
-})(self.document);
+var dist_exports = {};
+__export(dist_exports, { getMainColor: () => getMainColor });
+function majorityElement$1(nums) {
+	let majority_element = null;
+	let count = 0;
+	for (const num of nums) {
+		if (count == 0) majority_element = num;
+		if (num != majority_element) count--;
+else count++;
+	}
+	return majority_element;
+}
+function rgb2hex$1(rgb) {
+	const [R, G, B, A] = rgb;
+	let value = "#";
+	const newR = R.toString(16);
+	const newG = G.toString(16);
+	const newB = B.toString(16);
+	value += newR.length > 1 ? newR : `0${newR}`;
+	value += newG.length > 1 ? newG : `0${newG}`;
+	value += newB.length > 1 ? newB : `0${newB}`;
+	if (typeof A !== "undefined" && rgb.length > 3) {
+		const newA = Math.round(A * 255).toString(16);
+		value += newA.length > 1 ? newA : `0${newA}`;
+	}
+	return value;
+}
+function rgb2lab$1(rgb) {
+	let r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255, x, y, z;
+	r = r > .04045 ? Math.pow((r + .055) / 1.055, 2.4) : r / 12.92;
+	g = g > .04045 ? Math.pow((g + .055) / 1.055, 2.4) : g / 12.92;
+	b = b > .04045 ? Math.pow((b + .055) / 1.055, 2.4) : b / 12.92;
+	x = (r * .4124 + g * .3576 + b * .1805) / .95047;
+	y = (r * .2126 + g * .7152 + b * .0722) / 1;
+	z = (r * .0193 + g * .1192 + b * .9505) / 1.08883;
+	x = x > .008856 ? Math.pow(x, .3333333333333333) : 7.787 * x + .13793103448275862;
+	y = y > .008856 ? Math.pow(y, .3333333333333333) : 7.787 * y + .13793103448275862;
+	z = z > .008856 ? Math.pow(z, .3333333333333333) : 7.787 * z + .13793103448275862;
+	return [
+		116 * y - 16,
+		500 * (x - y),
+		200 * (y - z)
+	];
+}
+var ImageColorUtils$1, getMainColor;
+var init_dist = __esm({ "../sdk/dist/index.js"() {
+	(function(l, r) {
+		if (!l || l.getElementById("livereloadscript")) return;
+		r = l.createElement("script");
+		r.async = 1;
+		r.src = "//" + (self.location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=1";
+		r.id = "livereloadscript";
+		l.getElementsByTagName("head")[0].appendChild(r);
+	})(self.document);
+	ImageColorUtils$1 = class ImageColorUtils$2 {
+		constructor(params) {
+			const { origin, mockMovePx = 30, boundaryValue = 10, ParticleSize = 10, width, height, onload } = params || {};
+			if (!origin) throw new Error("Origin is necessary");
+else if ((origin instanceof ImageBitmap || origin instanceof HTMLImageElement) && (!width || !height)) throw new Error("Because of origin is not a http link, width and height is necessary ");
+			this.onload = onload;
+			ImageColorUtils$2.ParticleSize = ParticleSize;
+			ImageColorUtils$2.mockMovePx = mockMovePx;
+			ImageColorUtils$2.boundaryValue = boundaryValue;
+			this.init(origin, width, height).catch((error) => {
+				console.error(error);
+			}).then(() => {
+				this.onload && this.onload();
+			});
+		}
+		init(origin, width, height) {
+			return new Promise((resolve, reject) => {
+				if (typeof origin === "string") {
+					const img = new Image();
+					img.src = origin;
+					img.crossOrigin = "Anonymous";
+					img.onload = () => {
+						const canvasWidth = width || img.width;
+						const canvasHeight = height || canvasWidth / img.width * img.height;
+						this.initCanvas(img, canvasWidth, canvasHeight);
+						resolve(true);
+					};
+					if (img.complete) {
+						const canvasWidth = width || img.width;
+						const canvasHeight = height || canvasWidth / img.width * img.height;
+						this.initCanvas(img, canvasWidth, canvasHeight);
+						resolve(true);
+					}
+				} else if (origin instanceof ImageBitmap) {
+					this.initCanvas(origin, width, height);
+					resolve(true);
+				} else if (origin instanceof HTMLImageElement) {
+					this.initCanvas(origin, width, height);
+					resolve(true);
+				} else reject(new Error("The origin format is not supported"));
+			});
+		}
+		initCanvas(img, width, height) {
+			try {
+				this.canvas = new OffscreenCanvas(width, height);
+				this.ctx = this.canvas.getContext("2d");
+				this.ctx && this.ctx.drawImage(img, 0, 0, width, height);
+				this.imageData = this.ctx && this.ctx.getImageData(0, 0, width, height);
+			} catch (e) {
+				throw new Error(e);
+			}
+		}
+		pickColor(x, y) {
+			return ImageColorUtils$2.getRGB(this.imageData.data, x, y, this.canvas.width);
+		}
+		pickLineColor({ leftTopPosition, rightBottomPosition, scopes }) {
+			const data = this.imageData.data;
+			const media = {};
+			const lineArrayCollection = {
+				top: this.getArrayFromTopLine(leftTopPosition, rightBottomPosition),
+				left: this.getArrayFromLeftLine(leftTopPosition, rightBottomPosition),
+				right: this.getArrayFromRightLine(leftTopPosition, rightBottomPosition),
+				bottom: this.getArrayFromBottomLine(leftTopPosition, rightBottomPosition)
+			};
+			for (const key in lineArrayCollection) {
+				if (scopes && !scopes.filter((item) => item === key).length) continue;
+				const lineArray = lineArrayCollection[key];
+				const rgbArray = [];
+				for (const position of lineArray) {
+					const x = position[0];
+					const y = position[1];
+					const [r, g, b] = ImageColorUtils$2.getRGB(data, x, y, this.canvas.width);
+					rgbArray.push([
+						r,
+						g,
+						b
+					]);
+				}
+				media[key] = ImageColorUtils$2.getMedian(rgbArray);
+			}
+			return media;
+		}
+		static isAdjust(oldVal, newVal, boundaryValue, type) {
+			const val = boundaryValue;
+			let distance;
+			if (!type || type === "rgb") {
+				const [R_1, G_1, B_1] = oldVal;
+				const [R_2, G_2, B_2] = newVal;
+				const rmean = (R_1 + R_2) / 2;
+				const R = R_1 - R_2;
+				const G = G_1 - G_2;
+				const B = B_1 - B_2;
+				distance = Math.sqrt((2 + rmean / 256) * Math.pow(R, 2) + 4 * Math.pow(G, 2) + (2 + (255 - rmean) / 256) * Math.pow(B, 2));
+			} else if (type === "lab") {
+				const labOldVal = rgb2lab$1(oldVal);
+				const labnewVal = rgb2lab$1(newVal);
+				const [L_1, A_1, B_1] = labOldVal;
+				const [L_2, A_2, B_2] = labnewVal;
+				distance = Math.sqrt(Math.abs(Math.pow(L_1 - L_2, 2) + Math.pow(A_1 - A_2, 2) + Math.pow(B_1 - B_2, 2)));
+			}
+			if (distance >= val) return true;
+			return false;
+		}
+		static compare(oldVal, newVal, boundaryValue, type) {
+			return !ImageColorUtils$2.isAdjust(oldVal, newVal, boundaryValue || ImageColorUtils$2.boundaryValue, type);
+		}
+		static getAverage(data) {
+			const total = data.reduce((x, y) => [
+				x[0] + y[0],
+				x[1] + y[1],
+				x[2] + y[2]
+			]);
+			return [
+				Math.round(total[0] / data.length),
+				Math.round(total[1] / data.length),
+				Math.round(total[2] / data.length)
+			];
+		}
+		static getMost(data) {
+			const r = majorityElement$1(data.map((item) => item[0]));
+			const g = majorityElement$1(data.map((item) => item[1]));
+			const b = majorityElement$1(data.map((item) => item[2]));
+			const a = majorityElement$1(data.map((item) => item[3]));
+			return [
+				r,
+				g,
+				b,
+				a
+			];
+		}
+		static getMedian(data) {
+			const total0 = data.map((item) => item[0]).sort((x, y) => x > y ? 1 : -1);
+			const total1 = data.map((item) => item[1]).sort((x, y) => x > y ? 1 : -1);
+			const total2 = data.map((item) => item[2]).sort((x, y) => x > y ? 1 : -1);
+			const total3 = data.map((item) => item[3]).sort((x, y) => x > y ? 1 : -1);
+			const length = data.length;
+			if (length % 2 === 0) {
+				const r$1 = (total0[length / 2] + total0[length / 2 - 1]) / 2;
+				const g$1 = (total1[length / 2] + total1[length / 2 - 1]) / 2;
+				const b$1 = (total2[length / 2] + total2[length / 2 - 1]) / 2;
+				const a$1 = (total3[length / 2] + total3[length / 2 - 1]) / 2;
+				return [
+					r$1,
+					g$1,
+					b$1,
+					a$1
+				];
+			}
+			const r = total0[(length + 1) / 2];
+			const g = total1[(length + 1) / 2];
+			const b = total2[(length + 1) / 2];
+			const a = total3[(length + 1) / 2];
+			return [
+				r,
+				g,
+				b,
+				a
+			];
+		}
+		static getRGB(data, x, y, width) {
+			const index = (width * (y - 1) + x - 1) * 4;
+			const [r, g, b, a] = [
+				data[index],
+				data[index + 1],
+				data[index + 2],
+				data[index + 3]
+			];
+			return [
+				r,
+				g,
+				b,
+				Math.round(a / 255)
+			];
+		}
+		getArrayFromTopLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomX = rightBottomPosition[0];
+			for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, leftTopY]);
+			return result;
+		}
+		getArrayFromRightLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomX = rightBottomPosition[0];
+			const rightBottomY = rightBottomPosition[1];
+			for (let y = leftTopY; y <= rightBottomY; y++) result.push([rightBottomX, y]);
+			return result;
+		}
+		getArrayFromBottomLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const rightBottomX = rightBottomPosition[0];
+			const rightBottomY = rightBottomPosition[1];
+			for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, rightBottomY]);
+			return result;
+		}
+		getArrayFromLeftLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomY = rightBottomPosition[1];
+			for (let y = leftTopY; y <= rightBottomY; y++) result.push([leftTopX, y]);
+			return result;
+		}
+		leftTopMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
+			const mockMovePx = ImageColorUtils$2.mockMovePx;
+			let leftTopx = leftTopPosition[0];
+			let leftTopy = leftTopPosition[1];
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "left";
+				const movePx = -count;
+				const mockLeftTopx = leftTopx + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition: [mockLeftTopx, leftTopy],
+					rightBottomPosition,
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils$2.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$2.boundaryValue)) {
+					leftTopx = mockLeftTopx;
+					break;
+				}
+			}
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "top";
+				const movePx = -count;
+				const mockLeftTopy = leftTopy + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition: [leftTopx, mockLeftTopy],
+					rightBottomPosition,
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils$2.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$2.boundaryValue)) {
+					leftTopy = mockLeftTopy;
+					break;
+				}
+			}
+			return [leftTopx, leftTopy];
+		}
+		rightBottomMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
+			const mockMovePx = ImageColorUtils$2.mockMovePx;
+			let rightBottomx = rightBottomPosition[0];
+			let rightBottomy = rightBottomPosition[1];
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "right";
+				const movePx = count;
+				const mockRightBotttonx = rightBottomx + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition,
+					rightBottomPosition: [mockRightBotttonx, rightBottomy],
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils$2.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$2.boundaryValue)) {
+					rightBottomx = mockRightBotttonx;
+					break;
+				}
+			}
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "bottom";
+				const movePx = count;
+				const mockRightBottomy = rightBottomy + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition,
+					rightBottomPosition: [rightBottomx, mockRightBottomy],
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils$2.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$2.boundaryValue)) {
+					rightBottomy = mockRightBottomy;
+					break;
+				}
+			}
+			return [rightBottomx, rightBottomy];
+		}
+		adjust(leftTopPosition, rightBottomPosition) {
+			if (!leftTopPosition.length || !rightBottomPosition.length) throw new Error("Position is invalid！");
+			const originColorMedia = this.pickLineColor({
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustLeftTopPosition = this.leftTopMockMove({
+				originColorMedia,
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustRightBottomPosition = this.rightBottomMockMove({
+				originColorMedia,
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustWidth = adjustRightBottomPosition[0] - adjustLeftTopPosition[0];
+			const adjustHeight = adjustRightBottomPosition[1] - adjustLeftTopPosition[1];
+			const x = adjustLeftTopPosition[0];
+			const y = adjustLeftTopPosition[1];
+			return {
+				x,
+				y,
+				width: adjustWidth,
+				height: adjustHeight
+			};
+		}
+		pickColors() {
+			const similarColorsMap = {};
+			const res = [];
+			const boundaryValue = 20;
+			const type = "lab";
+			let lastColor;
+			for (let x = 1; x < this.canvas.width; x += ImageColorUtils$2.ParticleSize) for (let y = 1; y < this.canvas.height; y += ImageColorUtils$2.ParticleSize) {
+				const similarValues = Object.values(similarColorsMap);
+				const rgba = ImageColorUtils$2.getRGB(this.imageData.data, x, y, this.canvas.width);
+				lastColor = rgba;
+				if (rgba[3] === 0) continue;
+else if (!similarValues.length) similarColorsMap[similarValues.length] = [rgba];
+else if (similarValues.length && lastColor && ImageColorUtils$2.compare(rgba, lastColor, ImageColorUtils$2.boundaryValue, type)) {
+					let insert = false;
+					for (const similarValue of similarValues) if (ImageColorUtils$2.compare(rgba, similarValue[similarValue.length - 1], boundaryValue, type) && ImageColorUtils$2.compare(rgba, similarValue[Math.floor(similarValue.length / 2)], boundaryValue, type) && ImageColorUtils$2.compare(rgba, similarValue[Math.floor(similarValue.length - 1)], boundaryValue, type)) {
+						similarValue.push(rgba);
+						insert = true;
+					}
+					if (!insert) similarColorsMap[similarValues.length] = [rgba];
+				}
+			}
+			const values = Object.values(similarColorsMap);
+			values.sort((x, y) => x.length < y.length ? 1 : -1).filter((item) => item.length > Math.floor(this.imageData.data.length / (this.canvas.width * this.canvas.height) * 4)).forEach((item) => {
+				if (!res.some((value) => ImageColorUtils$2.compare(value, ImageColorUtils$2.getMedian(item), boundaryValue, type))) res.push(ImageColorUtils$2.getMedian(item));
+			});
+			return {
+				rgb: res.map((item) => `rgba(${item.join(",")})`),
+				hex: res.map((item) => rgb2hex$1(item))
+			};
+		}
+	};
+	getMainColor = (img, range = [0, 100], axis = "x") => {
+		return new Promise((resolve, reject) => {
+			const canvas = document.createElement("canvas");
+			const ctx = canvas.getContext("2d");
+			const image = new Image();
+			image.src = img;
+			image.crossOrigin = "anonymous";
+			const run = () => {
+				const lefTop = axis === "x" ? [range[0] < 0 ? image.width + range[0] : range[0], 0] : [0, range[0] < 0 ? image.height + range[0] : range[0]];
+				const rightBottom = axis === "x" ? [range[1] < 0 ? image.width + range[1] : range[1], image.height] : [image.width, range[1] < 0 ? image.height + range[1] : range[1]];
+				const drawWidth = rightBottom[0] - lefTop[0];
+				const drawHeight = rightBottom[1] - lefTop[1];
+				canvas.width = drawWidth;
+				canvas.height = drawHeight;
+				ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(image, lefTop[0], lefTop[1], drawWidth, drawHeight, 0, 0, drawWidth, drawHeight);
+				createImageBitmap(canvas).then(function(imageBitmap) {
+					const colorUtils = new ImageColorUtils$1({
+						origin: imageBitmap,
+						width: drawWidth,
+						height: drawHeight,
+						onload: () => {
+							var _a, _b, _c, _d, _e;
+							const res = colorUtils.pickColors();
+							resolve({
+								color: ((_e = (_d = (_c = (_b = (_a = res === null || res === void 0 ? void 0 : res.rgb) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.match(/rgba\(([0-9,\.]*)\)/)) === null || _c === void 0 ? void 0 : _c[1]) === null || _d === void 0 ? void 0 : _d.split(",")) === null || _e === void 0 ? void 0 : _e.slice(0, 3).join(",")) || "255,255,255",
+								image
+							});
+						}
+					});
+				}).catch(function(error) {
+					console.error("Failed to create ImageBitmap: " + error);
+				});
+			};
+			image.onload = run;
+		});
+	};
+} });
+
+//#endregion
+//#region ../../node_modules/.pnpm/image-color-utils@1.3.2/node_modules/image-color-utils/build/index.es.js
+var index_es_exports = {};
+__export(index_es_exports, {
+	ImageColorUtils: () => ImageColorUtils,
+	hex2rgb: () => hex2rgb,
+	isDeepColorByHsl: () => isDeepColorByHsl,
+	isDeepColorByHsv: () => isDeepColorByHsv,
+	majorityElement: () => majorityElement,
+	rgb2hex: () => rgb2hex,
+	rgb2hsl: () => rgb2hsl,
+	rgb2hsv: () => rgb2hsv,
+	rgb2hue: () => rgb2hue,
+	rgb2lab: () => rgb2lab,
+	rgb2value: () => rgb2value,
+	rgb2whiteness: () => rgb2whiteness
+});
+function rgb2value(rgb) {
+	const [r, g, b] = rgb;
+	const value = Math.max(r, g, b);
+	return value;
+}
+function rgb2whiteness(rgb) {
+	const [r, g, b] = rgb;
+	const whiteness = Math.min(r, g, b);
+	return whiteness;
+}
+function rgb2hue(rgb, fallbackhue = 0) {
+	const [r, g, b] = rgb;
+	const value = rgb2value(rgb);
+	const whiteness = rgb2whiteness(rgb);
+	const delta = value - whiteness;
+	if (delta) {
+		const segment = value === r ? (g - b) / delta : value === g ? (b - r) / delta : (r - g) / delta;
+		const shift = value === r ? segment < 0 ? 6 : 0 : value === g ? 2 : 4;
+		const hue = (segment + shift) * 60;
+		return hue;
+	} else return fallbackhue;
+}
 function majorityElement(nums) {
 	let majority_element = null;
 	let count = 0;
@@ -43,6 +508,22 @@ function majorityElement(nums) {
 else count++;
 	}
 	return majority_element;
+}
+function hex2rgb(hex) {
+	const [, r, g, b, a, rr, gg, bb, aa] = hex.match(hexColorMatch) || [];
+	if (rr !== undefined || r !== undefined) {
+		const red = rr !== undefined ? parseInt(rr, 16) : parseInt(r + r, 16);
+		const green = gg !== undefined ? parseInt(gg, 16) : parseInt(g + g, 16);
+		const blue = bb !== undefined ? parseInt(bb, 16) : parseInt(b + b, 16);
+		const alpha = aa !== undefined ? parseInt(aa, 16) : a !== undefined ? parseInt(a + a, 16) : 255;
+		return [
+			red,
+			green,
+			blue,
+			alpha
+		].map((c) => c * 100 / 255);
+	}
+	return undefined;
 }
 function rgb2hex(rgb) {
 	const [R, G, B, A] = rgb;
@@ -76,385 +557,31 @@ function rgb2lab(rgb) {
 		200 * (y - z)
 	];
 }
-var ImageColorUtils = class ImageColorUtils$1 {
-	constructor(params) {
-		const { origin, mockMovePx = 30, boundaryValue = 10, ParticleSize = 10, width, height, onload } = params || {};
-		if (!origin) throw new Error("Origin is necessary");
-else if ((origin instanceof ImageBitmap || origin instanceof HTMLImageElement) && (!width || !height)) throw new Error("Because of origin is not a http link, width and height is necessary ");
-		this.onload = onload;
-		ImageColorUtils$1.ParticleSize = ParticleSize;
-		ImageColorUtils$1.mockMovePx = mockMovePx;
-		ImageColorUtils$1.boundaryValue = boundaryValue;
-		this.init(origin, width, height).catch((error) => {
-			console.error(error);
-		}).then(() => {
-			this.onload && this.onload();
-		});
-	}
-	init(origin, width, height) {
-		return new Promise((resolve, reject) => {
-			if (typeof origin === "string") {
-				const img = new Image();
-				img.src = origin;
-				img.crossOrigin = "Anonymous";
-				img.onload = () => {
-					const canvasWidth = width || img.width;
-					const canvasHeight = height || canvasWidth / img.width * img.height;
-					this.initCanvas(img, canvasWidth, canvasHeight);
-					resolve(true);
-				};
-				if (img.complete) {
-					const canvasWidth = width || img.width;
-					const canvasHeight = height || canvasWidth / img.width * img.height;
-					this.initCanvas(img, canvasWidth, canvasHeight);
-					resolve(true);
-				}
-			} else if (origin instanceof ImageBitmap) {
-				this.initCanvas(origin, width, height);
-				resolve(true);
-			} else if (origin instanceof HTMLImageElement) {
-				this.initCanvas(origin, width, height);
-				resolve(true);
-			} else reject(new Error("The origin format is not supported"));
-		});
-	}
-	initCanvas(img, width, height) {
-		try {
-			this.canvas = new OffscreenCanvas(width, height);
-			this.ctx = this.canvas.getContext("2d");
-			this.ctx && this.ctx.drawImage(img, 0, 0, width, height);
-			this.imageData = this.ctx && this.ctx.getImageData(0, 0, width, height);
-		} catch (e) {
-			throw new Error(e);
-		}
-	}
-	pickColor(x, y) {
-		return ImageColorUtils$1.getRGB(this.imageData.data, x, y, this.canvas.width);
-	}
-	pickLineColor({ leftTopPosition, rightBottomPosition, scopes }) {
-		const data = this.imageData.data;
-		const media = {};
-		const lineArrayCollection = {
-			top: this.getArrayFromTopLine(leftTopPosition, rightBottomPosition),
-			left: this.getArrayFromLeftLine(leftTopPosition, rightBottomPosition),
-			right: this.getArrayFromRightLine(leftTopPosition, rightBottomPosition),
-			bottom: this.getArrayFromBottomLine(leftTopPosition, rightBottomPosition)
-		};
-		for (const key in lineArrayCollection) {
-			if (scopes && !scopes.filter((item) => item === key).length) continue;
-			const lineArray = lineArrayCollection[key];
-			const rgbArray = [];
-			for (const position of lineArray) {
-				const x = position[0];
-				const y = position[1];
-				const [r, g, b] = ImageColorUtils$1.getRGB(data, x, y, this.canvas.width);
-				rgbArray.push([
-					r,
-					g,
-					b
-				]);
-			}
-			media[key] = ImageColorUtils$1.getMedian(rgbArray);
-		}
-		return media;
-	}
-	static isAdjust(oldVal, newVal, boundaryValue, type) {
-		const val = boundaryValue;
-		let distance;
-		if (!type || type === "rgb") {
-			const [R_1, G_1, B_1] = oldVal;
-			const [R_2, G_2, B_2] = newVal;
-			const rmean = (R_1 + R_2) / 2;
-			const R = R_1 - R_2;
-			const G = G_1 - G_2;
-			const B = B_1 - B_2;
-			distance = Math.sqrt((2 + rmean / 256) * Math.pow(R, 2) + 4 * Math.pow(G, 2) + (2 + (255 - rmean) / 256) * Math.pow(B, 2));
-		} else if (type === "lab") {
-			const labOldVal = rgb2lab(oldVal);
-			const labnewVal = rgb2lab(newVal);
-			const [L_1, A_1, B_1] = labOldVal;
-			const [L_2, A_2, B_2] = labnewVal;
-			distance = Math.sqrt(Math.abs(Math.pow(L_1 - L_2, 2) + Math.pow(A_1 - A_2, 2) + Math.pow(B_1 - B_2, 2)));
-		}
-		if (distance >= val) return true;
-		return false;
-	}
-	static compare(oldVal, newVal, boundaryValue, type) {
-		return !ImageColorUtils$1.isAdjust(oldVal, newVal, boundaryValue || ImageColorUtils$1.boundaryValue, type);
-	}
-	static getAverage(data) {
-		const total = data.reduce((x, y) => [
-			x[0] + y[0],
-			x[1] + y[1],
-			x[2] + y[2]
-		]);
-		return [
-			Math.round(total[0] / data.length),
-			Math.round(total[1] / data.length),
-			Math.round(total[2] / data.length)
-		];
-	}
-	static getMost(data) {
-		const r = majorityElement(data.map((item) => item[0]));
-		const g = majorityElement(data.map((item) => item[1]));
-		const b = majorityElement(data.map((item) => item[2]));
-		const a = majorityElement(data.map((item) => item[3]));
-		return [
-			r,
-			g,
-			b,
-			a
-		];
-	}
-	static getMedian(data) {
-		const total0 = data.map((item) => item[0]).sort((x, y) => x > y ? 1 : -1);
-		const total1 = data.map((item) => item[1]).sort((x, y) => x > y ? 1 : -1);
-		const total2 = data.map((item) => item[2]).sort((x, y) => x > y ? 1 : -1);
-		const total3 = data.map((item) => item[3]).sort((x, y) => x > y ? 1 : -1);
-		const length = data.length;
-		if (length % 2 === 0) {
-			const r$1 = (total0[length / 2] + total0[length / 2 - 1]) / 2;
-			const g$1 = (total1[length / 2] + total1[length / 2 - 1]) / 2;
-			const b$1 = (total2[length / 2] + total2[length / 2 - 1]) / 2;
-			const a$1 = (total3[length / 2] + total3[length / 2 - 1]) / 2;
-			return [
-				r$1,
-				g$1,
-				b$1,
-				a$1
-			];
-		}
-		const r = total0[(length + 1) / 2];
-		const g = total1[(length + 1) / 2];
-		const b = total2[(length + 1) / 2];
-		const a = total3[(length + 1) / 2];
-		return [
-			r,
-			g,
-			b,
-			a
-		];
-	}
-	static getRGB(data, x, y, width) {
-		const index = (width * (y - 1) + x - 1) * 4;
-		const [r, g, b, a] = [
-			data[index],
-			data[index + 1],
-			data[index + 2],
-			data[index + 3]
-		];
-		return [
-			r,
-			g,
-			b,
-			Math.round(a / 255)
-		];
-	}
-	getArrayFromTopLine(leftTopPosition, rightBottomPosition) {
-		const result = [];
-		const leftTopX = leftTopPosition[0];
-		const leftTopY = leftTopPosition[1];
-		const rightBottomX = rightBottomPosition[0];
-		for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, leftTopY]);
-		return result;
-	}
-	getArrayFromRightLine(leftTopPosition, rightBottomPosition) {
-		const result = [];
-		const leftTopY = leftTopPosition[1];
-		const rightBottomX = rightBottomPosition[0];
-		const rightBottomY = rightBottomPosition[1];
-		for (let y = leftTopY; y <= rightBottomY; y++) result.push([rightBottomX, y]);
-		return result;
-	}
-	getArrayFromBottomLine(leftTopPosition, rightBottomPosition) {
-		const result = [];
-		const leftTopX = leftTopPosition[0];
-		const rightBottomX = rightBottomPosition[0];
-		const rightBottomY = rightBottomPosition[1];
-		for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, rightBottomY]);
-		return result;
-	}
-	getArrayFromLeftLine(leftTopPosition, rightBottomPosition) {
-		const result = [];
-		const leftTopX = leftTopPosition[0];
-		const leftTopY = leftTopPosition[1];
-		const rightBottomY = rightBottomPosition[1];
-		for (let y = leftTopY; y <= rightBottomY; y++) result.push([leftTopX, y]);
-		return result;
-	}
-	leftTopMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
-		const mockMovePx = ImageColorUtils$1.mockMovePx;
-		let leftTopx = leftTopPosition[0];
-		let leftTopy = leftTopPosition[1];
-		for (let count = 1; count <= mockMovePx; count++) {
-			const key = "left";
-			const movePx = -count;
-			const mockLeftTopx = leftTopx + movePx;
-			const mockHslMedia = this.pickLineColor({
-				leftTopPosition: [mockLeftTopx, leftTopy],
-				rightBottomPosition,
-				scopes: [key]
-			})[key];
-			if (ImageColorUtils$1.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$1.boundaryValue)) {
-				leftTopx = mockLeftTopx;
+function rgb2hsl(rgb) {
+	let r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255, max = Math.max(r, g, b), min = Math.min(r, g, b), h, s, l = (max + min) / 2;
+	if (max === min) h = s = 0;
+else {
+		let d = max - min;
+		s = l > .5 ? d / (2 - max - min) : d / (max + min);
+		switch (max) {
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
 				break;
-			}
-		}
-		for (let count = 1; count <= mockMovePx; count++) {
-			const key = "top";
-			const movePx = -count;
-			const mockLeftTopy = leftTopy + movePx;
-			const mockHslMedia = this.pickLineColor({
-				leftTopPosition: [leftTopx, mockLeftTopy],
-				rightBottomPosition,
-				scopes: [key]
-			})[key];
-			if (ImageColorUtils$1.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$1.boundaryValue)) {
-				leftTopy = mockLeftTopy;
+			case g:
+				h = (b - r) / d + 2;
 				break;
-			}
-		}
-		return [leftTopx, leftTopy];
-	}
-	rightBottomMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
-		const mockMovePx = ImageColorUtils$1.mockMovePx;
-		let rightBottomx = rightBottomPosition[0];
-		let rightBottomy = rightBottomPosition[1];
-		for (let count = 1; count <= mockMovePx; count++) {
-			const key = "right";
-			const movePx = count;
-			const mockRightBotttonx = rightBottomx + movePx;
-			const mockHslMedia = this.pickLineColor({
-				leftTopPosition,
-				rightBottomPosition: [mockRightBotttonx, rightBottomy],
-				scopes: [key]
-			})[key];
-			if (ImageColorUtils$1.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$1.boundaryValue)) {
-				rightBottomx = mockRightBotttonx;
+			case b:
+				h = (r - g) / d + 4;
 				break;
-			}
 		}
-		for (let count = 1; count <= mockMovePx; count++) {
-			const key = "bottom";
-			const movePx = count;
-			const mockRightBottomy = rightBottomy + movePx;
-			const mockHslMedia = this.pickLineColor({
-				leftTopPosition,
-				rightBottomPosition: [rightBottomx, mockRightBottomy],
-				scopes: [key]
-			})[key];
-			if (ImageColorUtils$1.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils$1.boundaryValue)) {
-				rightBottomy = mockRightBottomy;
-				break;
-			}
-		}
-		return [rightBottomx, rightBottomy];
+		h /= 6;
 	}
-	adjust(leftTopPosition, rightBottomPosition) {
-		if (!leftTopPosition.length || !rightBottomPosition.length) throw new Error("Position is invalid！");
-		const originColorMedia = this.pickLineColor({
-			leftTopPosition,
-			rightBottomPosition
-		});
-		const adjustLeftTopPosition = this.leftTopMockMove({
-			originColorMedia,
-			leftTopPosition,
-			rightBottomPosition
-		});
-		const adjustRightBottomPosition = this.rightBottomMockMove({
-			originColorMedia,
-			leftTopPosition,
-			rightBottomPosition
-		});
-		const adjustWidth = adjustRightBottomPosition[0] - adjustLeftTopPosition[0];
-		const adjustHeight = adjustRightBottomPosition[1] - adjustLeftTopPosition[1];
-		const x = adjustLeftTopPosition[0];
-		const y = adjustLeftTopPosition[1];
-		return {
-			x,
-			y,
-			width: adjustWidth,
-			height: adjustHeight
-		};
-	}
-	pickColors() {
-		const similarColorsMap = {};
-		const res = [];
-		const boundaryValue = 20;
-		const type = "lab";
-		let lastColor;
-		for (let x = 1; x < this.canvas.width; x += ImageColorUtils$1.ParticleSize) for (let y = 1; y < this.canvas.height; y += ImageColorUtils$1.ParticleSize) {
-			const similarValues = Object.values(similarColorsMap);
-			const rgba = ImageColorUtils$1.getRGB(this.imageData.data, x, y, this.canvas.width);
-			lastColor = rgba;
-			if (rgba[3] === 0) continue;
-else if (!similarValues.length) similarColorsMap[similarValues.length] = [rgba];
-else if (similarValues.length && lastColor && ImageColorUtils$1.compare(rgba, lastColor, ImageColorUtils$1.boundaryValue, type)) {
-				let insert = false;
-				for (const similarValue of similarValues) if (ImageColorUtils$1.compare(rgba, similarValue[similarValue.length - 1], boundaryValue, type) && ImageColorUtils$1.compare(rgba, similarValue[Math.floor(similarValue.length / 2)], boundaryValue, type) && ImageColorUtils$1.compare(rgba, similarValue[Math.floor(similarValue.length - 1)], boundaryValue, type)) {
-					similarValue.push(rgba);
-					insert = true;
-				}
-				if (!insert) similarColorsMap[similarValues.length] = [rgba];
-			}
-		}
-		const values = Object.values(similarColorsMap);
-		values.sort((x, y) => x.length < y.length ? 1 : -1).filter((item) => item.length > Math.floor(this.imageData.data.length / (this.canvas.width * this.canvas.height) * 4)).forEach((item) => {
-			if (!res.some((value) => ImageColorUtils$1.compare(value, ImageColorUtils$1.getMedian(item), boundaryValue, type))) res.push(ImageColorUtils$1.getMedian(item));
-		});
-		return {
-			rgb: res.map((item) => `rgba(${item.join(",")})`),
-			hex: res.map((item) => rgb2hex(item))
-		};
-	}
-};
-const getMainColor = (img, range = [0, 100], axis = "x") => {
-	return new Promise((resolve, reject) => {
-		const canvas = document.createElement("canvas");
-		const ctx = canvas.getContext("2d");
-		const image = new Image();
-		image.src = img;
-		image.crossOrigin = "anonymous";
-		const run = () => {
-			const lefTop = axis === "x" ? [range[0] < 0 ? image.width + range[0] : range[0], 0] : [0, range[0] < 0 ? image.height + range[0] : range[0]];
-			const rightBottom = axis === "x" ? [range[1] < 0 ? image.width + range[1] : range[1], image.height] : [image.width, range[1] < 0 ? image.height + range[1] : range[1]];
-			const drawWidth = rightBottom[0] - lefTop[0];
-			const drawHeight = rightBottom[1] - lefTop[1];
-			canvas.width = drawWidth;
-			canvas.height = drawHeight;
-			ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(image, lefTop[0], lefTop[1], drawWidth, drawHeight, 0, 0, drawWidth, drawHeight);
-			createImageBitmap(canvas).then(function(imageBitmap) {
-				const colorUtils = new ImageColorUtils({
-					origin: imageBitmap,
-					width: drawWidth,
-					height: drawHeight,
-					onload: () => {
-						var _a, _b, _c, _d, _e;
-						const res = colorUtils.pickColors();
-						resolve({
-							color: ((_e = (_d = (_c = (_b = (_a = res === null || res === void 0 ? void 0 : res.rgb) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.match(/rgba\(([0-9,\.]*)\)/)) === null || _c === void 0 ? void 0 : _c[1]) === null || _d === void 0 ? void 0 : _d.split(",")) === null || _e === void 0 ? void 0 : _e.slice(0, 3).join(",")) || "255,255,255",
-							image
-						});
-					}
-				});
-			}).catch(function(error) {
-				console.error("Failed to create ImageBitmap: " + error);
-			});
-		};
-		image.onload = run;
-	});
-};
-
-//#endregion
-//#region ../../node_modules/.pnpm/image-color-utils@1.3.2/node_modules/image-color-utils/build/index.es.js
-(function(l, r) {
-	if (!l || l.getElementById("livereloadscript")) return;
-	r = l.createElement("script");
-	r.async = 1;
-	r.src = "//" + (self.location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=1";
-	r.id = "livereloadscript";
-	l.getElementsByTagName("head")[0].appendChild(r);
-})(self.document);
+	return [
+		h * 360,
+		s * 100,
+		l * 100
+	];
+}
 function rgb2hsv(rgb) {
 	let [r, g, b] = rgb;
 	r /= 255;
@@ -485,12 +612,360 @@ else {
 		v * 100
 	];
 }
+function isDeepColorByHsl(hsl) {
+	const lightness = hsl[2] / 100;
+	return lightness <= .6;
+}
 function isDeepColorByHsv(hsv) {
 	const v = hsv[2];
 	const s = hsv[1];
 	console.log(hsv);
 	return v <= 60 || s > 40;
 }
+var hexColorMatch, ImageColorUtils;
+var init_index_es = __esm({ "../../node_modules/.pnpm/image-color-utils@1.3.2/node_modules/image-color-utils/build/index.es.js"() {
+	(function(l, r) {
+		if (!l || l.getElementById("livereloadscript")) return;
+		r = l.createElement("script");
+		r.async = 1;
+		r.src = "//" + (self.location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=1";
+		r.id = "livereloadscript";
+		l.getElementsByTagName("head")[0].appendChild(r);
+	})(self.document);
+	hexColorMatch = /^#?(?:([a-f0-9])([a-f0-9])([a-f0-9])([a-f0-9])?|([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})?)$/i;
+	ImageColorUtils = class ImageColorUtils {
+		constructor(params) {
+			const { origin, mockMovePx = 30, boundaryValue = 10, ParticleSize = 10, width, height, onload } = params || {};
+			if (!origin) throw new Error("Origin is necessary");
+else if ((origin instanceof ImageBitmap || origin instanceof HTMLImageElement) && (!width || !height)) throw new Error("Because of origin is not a http link, width and height is necessary ");
+			this.onload = onload;
+			ImageColorUtils.ParticleSize = ParticleSize;
+			ImageColorUtils.mockMovePx = mockMovePx;
+			ImageColorUtils.boundaryValue = boundaryValue;
+			this.init(origin, width, height).catch((error) => {
+				console.error(error);
+			}).then(() => {
+				this.onload && this.onload();
+			});
+		}
+		init(origin, width, height) {
+			return new Promise((resolve, reject) => {
+				if (typeof origin === "string") {
+					const img = new Image();
+					img.src = origin;
+					img.crossOrigin = "Anonymous";
+					img.onload = () => {
+						const canvasWidth = width || img.width;
+						const canvasHeight = height || canvasWidth / img.width * img.height;
+						this.initCanvas(img, canvasWidth, canvasHeight);
+						resolve(true);
+					};
+					if (img.complete) {
+						const canvasWidth = width || img.width;
+						const canvasHeight = height || canvasWidth / img.width * img.height;
+						this.initCanvas(img, canvasWidth, canvasHeight);
+						resolve(true);
+					}
+				} else if (origin instanceof ImageBitmap) {
+					this.initCanvas(origin, width, height);
+					resolve(true);
+				} else if (origin instanceof HTMLImageElement) {
+					this.initCanvas(origin, width, height);
+					resolve(true);
+				} else reject(new Error("The origin format is not supported"));
+			});
+		}
+		initCanvas(img, width, height) {
+			try {
+				this.canvas = new OffscreenCanvas(width, height);
+				this.ctx = this.canvas.getContext("2d");
+				this.ctx && this.ctx.drawImage(img, 0, 0, width, height);
+				this.imageData = this.ctx && this.ctx.getImageData(0, 0, width, height);
+			} catch (e) {
+				throw new Error(e);
+			}
+		}
+		pickColor(x, y) {
+			return ImageColorUtils.getRGB(this.imageData.data, x, y, this.canvas.width);
+		}
+		pickLineColor({ leftTopPosition, rightBottomPosition, scopes }) {
+			const data = this.imageData.data;
+			const media = {};
+			const lineArrayCollection = {
+				top: this.getArrayFromTopLine(leftTopPosition, rightBottomPosition),
+				left: this.getArrayFromLeftLine(leftTopPosition, rightBottomPosition),
+				right: this.getArrayFromRightLine(leftTopPosition, rightBottomPosition),
+				bottom: this.getArrayFromBottomLine(leftTopPosition, rightBottomPosition)
+			};
+			for (const key in lineArrayCollection) {
+				if (scopes && !scopes.filter((item) => item === key).length) continue;
+				const lineArray = lineArrayCollection[key];
+				const rgbArray = [];
+				for (const position of lineArray) {
+					const x = position[0];
+					const y = position[1];
+					const [r, g, b] = ImageColorUtils.getRGB(data, x, y, this.canvas.width);
+					rgbArray.push([
+						r,
+						g,
+						b
+					]);
+				}
+				media[key] = ImageColorUtils.getMedian(rgbArray);
+			}
+			return media;
+		}
+		static isAdjust(oldVal, newVal, boundaryValue, type) {
+			const val = boundaryValue;
+			let distance;
+			if (!type || type === "rgb") {
+				const [R_1, G_1, B_1] = oldVal;
+				const [R_2, G_2, B_2] = newVal;
+				const rmean = (R_1 + R_2) / 2;
+				const R = R_1 - R_2;
+				const G = G_1 - G_2;
+				const B = B_1 - B_2;
+				distance = Math.sqrt((2 + rmean / 256) * Math.pow(R, 2) + 4 * Math.pow(G, 2) + (2 + (255 - rmean) / 256) * Math.pow(B, 2));
+			} else if (type === "lab") {
+				const labOldVal = rgb2lab(oldVal);
+				const labnewVal = rgb2lab(newVal);
+				const [L_1, A_1, B_1] = labOldVal;
+				const [L_2, A_2, B_2] = labnewVal;
+				distance = Math.sqrt(Math.abs(Math.pow(L_1 - L_2, 2) + Math.pow(A_1 - A_2, 2) + Math.pow(B_1 - B_2, 2)));
+			}
+			if (distance >= val) return true;
+			return false;
+		}
+		static compare(oldVal, newVal, boundaryValue, type) {
+			return !ImageColorUtils.isAdjust(oldVal, newVal, boundaryValue || ImageColorUtils.boundaryValue, type);
+		}
+		static getAverage(data) {
+			const total = data.reduce((x, y) => [
+				x[0] + y[0],
+				x[1] + y[1],
+				x[2] + y[2]
+			]);
+			return [
+				Math.round(total[0] / data.length),
+				Math.round(total[1] / data.length),
+				Math.round(total[2] / data.length)
+			];
+		}
+		static getMost(data) {
+			const r = majorityElement(data.map((item) => item[0]));
+			const g = majorityElement(data.map((item) => item[1]));
+			const b = majorityElement(data.map((item) => item[2]));
+			const a = majorityElement(data.map((item) => item[3]));
+			return [
+				r,
+				g,
+				b,
+				a
+			];
+		}
+		static getMedian(data) {
+			const total0 = data.map((item) => item[0]).sort((x, y) => x > y ? 1 : -1);
+			const total1 = data.map((item) => item[1]).sort((x, y) => x > y ? 1 : -1);
+			const total2 = data.map((item) => item[2]).sort((x, y) => x > y ? 1 : -1);
+			const total3 = data.map((item) => item[3]).sort((x, y) => x > y ? 1 : -1);
+			const length = data.length;
+			if (length % 2 === 0) {
+				const r$1 = (total0[length / 2] + total0[length / 2 - 1]) / 2;
+				const g$1 = (total1[length / 2] + total1[length / 2 - 1]) / 2;
+				const b$1 = (total2[length / 2] + total2[length / 2 - 1]) / 2;
+				const a$1 = (total3[length / 2] + total3[length / 2 - 1]) / 2;
+				return [
+					r$1,
+					g$1,
+					b$1,
+					a$1
+				];
+			}
+			const r = total0[(length + 1) / 2];
+			const g = total1[(length + 1) / 2];
+			const b = total2[(length + 1) / 2];
+			const a = total3[(length + 1) / 2];
+			return [
+				r,
+				g,
+				b,
+				a
+			];
+		}
+		static getRGB(data, x, y, width) {
+			const index = (width * (y - 1) + x - 1) * 4;
+			const [r, g, b, a] = [
+				data[index],
+				data[index + 1],
+				data[index + 2],
+				data[index + 3]
+			];
+			return [
+				r,
+				g,
+				b,
+				Math.round(a / 255)
+			];
+		}
+		getArrayFromTopLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomX = rightBottomPosition[0];
+			for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, leftTopY]);
+			return result;
+		}
+		getArrayFromRightLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomX = rightBottomPosition[0];
+			const rightBottomY = rightBottomPosition[1];
+			for (let y = leftTopY; y <= rightBottomY; y++) result.push([rightBottomX, y]);
+			return result;
+		}
+		getArrayFromBottomLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const rightBottomX = rightBottomPosition[0];
+			const rightBottomY = rightBottomPosition[1];
+			for (let x = leftTopX; x <= rightBottomX; x++) result.push([x, rightBottomY]);
+			return result;
+		}
+		getArrayFromLeftLine(leftTopPosition, rightBottomPosition) {
+			const result = [];
+			const leftTopX = leftTopPosition[0];
+			const leftTopY = leftTopPosition[1];
+			const rightBottomY = rightBottomPosition[1];
+			for (let y = leftTopY; y <= rightBottomY; y++) result.push([leftTopX, y]);
+			return result;
+		}
+		leftTopMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
+			const mockMovePx = ImageColorUtils.mockMovePx;
+			let leftTopx = leftTopPosition[0];
+			let leftTopy = leftTopPosition[1];
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "left";
+				const movePx = -count;
+				const mockLeftTopx = leftTopx + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition: [mockLeftTopx, leftTopy],
+					rightBottomPosition,
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils.boundaryValue)) {
+					leftTopx = mockLeftTopx;
+					break;
+				}
+			}
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "top";
+				const movePx = -count;
+				const mockLeftTopy = leftTopy + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition: [leftTopx, mockLeftTopy],
+					rightBottomPosition,
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils.boundaryValue)) {
+					leftTopy = mockLeftTopy;
+					break;
+				}
+			}
+			return [leftTopx, leftTopy];
+		}
+		rightBottomMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) {
+			const mockMovePx = ImageColorUtils.mockMovePx;
+			let rightBottomx = rightBottomPosition[0];
+			let rightBottomy = rightBottomPosition[1];
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "right";
+				const movePx = count;
+				const mockRightBotttonx = rightBottomx + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition,
+					rightBottomPosition: [mockRightBotttonx, rightBottomy],
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils.boundaryValue)) {
+					rightBottomx = mockRightBotttonx;
+					break;
+				}
+			}
+			for (let count = 1; count <= mockMovePx; count++) {
+				const key = "bottom";
+				const movePx = count;
+				const mockRightBottomy = rightBottomy + movePx;
+				const mockHslMedia = this.pickLineColor({
+					leftTopPosition,
+					rightBottomPosition: [rightBottomx, mockRightBottomy],
+					scopes: [key]
+				})[key];
+				if (ImageColorUtils.isAdjust(originColorMedia[key], mockHslMedia, ImageColorUtils.boundaryValue)) {
+					rightBottomy = mockRightBottomy;
+					break;
+				}
+			}
+			return [rightBottomx, rightBottomy];
+		}
+		adjust(leftTopPosition, rightBottomPosition) {
+			if (!leftTopPosition.length || !rightBottomPosition.length) throw new Error("Position is invalid！");
+			const originColorMedia = this.pickLineColor({
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustLeftTopPosition = this.leftTopMockMove({
+				originColorMedia,
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustRightBottomPosition = this.rightBottomMockMove({
+				originColorMedia,
+				leftTopPosition,
+				rightBottomPosition
+			});
+			const adjustWidth = adjustRightBottomPosition[0] - adjustLeftTopPosition[0];
+			const adjustHeight = adjustRightBottomPosition[1] - adjustLeftTopPosition[1];
+			const x = adjustLeftTopPosition[0];
+			const y = adjustLeftTopPosition[1];
+			return {
+				x,
+				y,
+				width: adjustWidth,
+				height: adjustHeight
+			};
+		}
+		pickColors() {
+			const similarColorsMap = {};
+			const res = [];
+			const boundaryValue = 20;
+			const type = "lab";
+			let lastColor;
+			for (let x = 1; x < this.canvas.width; x += ImageColorUtils.ParticleSize) for (let y = 1; y < this.canvas.height; y += ImageColorUtils.ParticleSize) {
+				const similarValues = Object.values(similarColorsMap);
+				const rgba = ImageColorUtils.getRGB(this.imageData.data, x, y, this.canvas.width);
+				lastColor = rgba;
+				if (rgba[3] === 0) continue;
+else if (!similarValues.length) similarColorsMap[similarValues.length] = [rgba];
+else if (similarValues.length && lastColor && ImageColorUtils.compare(rgba, lastColor, ImageColorUtils.boundaryValue, type)) {
+					let insert = false;
+					for (const similarValue of similarValues) if (ImageColorUtils.compare(rgba, similarValue[similarValue.length - 1], boundaryValue, type) && ImageColorUtils.compare(rgba, similarValue[Math.floor(similarValue.length / 2)], boundaryValue, type) && ImageColorUtils.compare(rgba, similarValue[Math.floor(similarValue.length - 1)], boundaryValue, type)) {
+						similarValue.push(rgba);
+						insert = true;
+					}
+					if (!insert) similarColorsMap[similarValues.length] = [rgba];
+				}
+			}
+			const values = Object.values(similarColorsMap);
+			values.sort((x, y) => x.length < y.length ? 1 : -1).filter((item) => item.length > Math.floor(this.imageData.data.length / (this.canvas.width * this.canvas.height) * 4)).forEach((item) => {
+				if (!res.some((value) => ImageColorUtils.compare(value, ImageColorUtils.getMedian(item), boundaryValue, type))) res.push(ImageColorUtils.getMedian(item));
+			});
+			return {
+				rgb: res.map((item) => `rgba(${item.join(",")})`),
+				hex: res.map((item) => rgb2hex(item))
+			};
+		}
+	};
+} });
 
 //#endregion
 //#region ../../node_modules/.pnpm/react@18.2.0/node_modules/react/cjs/react.development.js
@@ -1440,7 +1915,7 @@ else if (realContext.Provider === Context) error("Calling useContext(Context.Pro
 			}
 			return dispatcher.useContext(Context);
 		}
-		function useState$1(initialState) {
+		function useState(initialState) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useState(initialState);
 		}
@@ -1448,11 +1923,11 @@ else if (realContext.Provider === Context) error("Calling useContext(Context.Pro
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useReducer(reducer, initialArg, init);
 		}
-		function useRef$1(initialValue) {
+		function useRef(initialValue) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useRef(initialValue);
 		}
-		function useEffect$1(create, deps) {
+		function useEffect(create, deps) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useEffect(create, deps);
 		}
@@ -1460,15 +1935,15 @@ else if (realContext.Provider === Context) error("Calling useContext(Context.Pro
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useInsertionEffect(create, deps);
 		}
-		function useLayoutEffect$1(create, deps) {
+		function useLayoutEffect(create, deps) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useLayoutEffect(create, deps);
 		}
-		function useCallback$1(callback, deps) {
+		function useCallback(callback, deps) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useCallback(callback, deps);
 		}
-		function useMemo$1(create, deps) {
+		function useMemo(create, deps) {
 			var dispatcher = resolveDispatcher();
 			return dispatcher.useMemo(create, deps);
 		}
@@ -2099,19 +2574,19 @@ else resolve(returnValue);
 		exports.memo = memo;
 		exports.startTransition = startTransition;
 		exports.unstable_act = act;
-		exports.useCallback = useCallback$1;
+		exports.useCallback = useCallback;
 		exports.useContext = useContext;
 		exports.useDebugValue = useDebugValue;
 		exports.useDeferredValue = useDeferredValue;
-		exports.useEffect = useEffect$1;
+		exports.useEffect = useEffect;
 		exports.useId = useId;
 		exports.useImperativeHandle = useImperativeHandle;
 		exports.useInsertionEffect = useInsertionEffect;
-		exports.useLayoutEffect = useLayoutEffect$1;
-		exports.useMemo = useMemo$1;
+		exports.useLayoutEffect = useLayoutEffect;
+		exports.useMemo = useMemo;
 		exports.useReducer = useReducer;
-		exports.useRef = useRef$1;
-		exports.useState = useState$1;
+		exports.useRef = useRef;
+		exports.useState = useState;
 		exports.useSyncExternalStore = useSyncExternalStore;
 		exports.useTransition = useTransition;
 		exports.version = ReactVersion;
@@ -2126,336 +2601,384 @@ var require_react = __commonJS({ "../../node_modules/.pnpm/react@18.2.0/node_mod
 } });
 
 //#endregion
-//#region src/banner.tsx
-var import_react = __toESM(require_react());
-const offsetValues = [
-	2,
-	20,
-	120
-];
-const filterWidth = 50;
-const filterOffset = filterWidth / 2;
-const getFinalColor = (rgb) => {
-	if (!rgb) return "#fff";
-	const rgbArr = rgb.split(",");
-	const hsl = rgb2hsv([
-		parseInt(rgbArr[0]),
-		parseInt(rgbArr[1]),
-		parseInt(rgbArr[2])
-	]);
-	return isDeepColorByHsv(hsl) ? "#000" : "#fff";
-};
-const debounce = (fn, delay) => {
-	let timer;
-	return function(...args) {
-		clearTimeout(timer);
-		timer = setTimeout(() => {
-			fn.apply(this, args);
-		}, delay);
-	};
-};
-function ResponsiveBanner(props) {
-	var _a, _b, _c, _d, _e, _f;
-	const { width = "100%", height = "100%", img, backgroundPosition = "center", style, className } = props;
-	const conRef = (0, import_react.useRef)(null);
-	const [mounted, setMounted] = (0, import_react.useState)(0);
-	const bannerWidth = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		return !mounted ? 0 : width === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetWidth) || 0 : width;
-	}, [
-		width,
-		conRef,
-		mounted
-	]);
-	const bannerHeight = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		return !mounted ? 0 : height === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetHeight) || 0 : height;
-	}, [
-		height,
-		conRef,
-		mounted
-	]);
-	const [coverInfo, setCoverInfo] = (0, import_react.useState)({
-		left: "",
-		right: "",
-		bottom: "",
-		top: ""
-	});
-	const isAdaptY = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1, _d$1;
-		return !!(((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) && ((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) && ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width) / bannerWidth > ((_d$1 = coverInfo.image) === null || _d$1 === void 0 ? void 0 : _d$1.height) / bannerHeight);
-	}, [
-		(_a = coverInfo.image) === null || _a === void 0 ? void 0 : _a.width,
-		(_b = coverInfo.image) === null || _b === void 0 ? void 0 : _b.height,
-		bannerWidth,
-		bannerHeight
-	]);
-	const renderedCoverWidth = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1;
-		return isAdaptY || !((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) ? bannerWidth : Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.width) * bannerHeight / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.height));
-	}, [
-		isAdaptY,
-		(_c = coverInfo.image) === null || _c === void 0 ? void 0 : _c.width,
-		(_d = coverInfo.image) === null || _d === void 0 ? void 0 : _d.height,
-		bannerWidth,
-		bannerHeight
-	]);
-	const renderedCoverHeight = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1;
-		return isAdaptY && ((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.height) ? Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) * bannerWidth / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width)) : bannerHeight;
-	}, [
-		isAdaptY,
-		(_e = coverInfo.image) === null || _e === void 0 ? void 0 : _e.width,
-		(_f = coverInfo.image) === null || _f === void 0 ? void 0 : _f.height,
-		bannerWidth,
-		bannerHeight
-	]);
-	const gapLength = (0, import_react.useMemo)(() => backgroundPosition === "center" || ["top", "bottom"].includes(backgroundPosition) && !isAdaptY || ["left", "right"].includes(backgroundPosition) && isAdaptY ? 2 : 1, [backgroundPosition, isAdaptY]);
-	const gapWidth = (0, import_react.useMemo)(() => Math.ceil(renderedCoverWidth && (bannerWidth - renderedCoverWidth) / gapLength), [
-		renderedCoverWidth,
-		bannerWidth,
-		gapLength
-	]);
-	const gapHeight = (0, import_react.useMemo)(() => Math.ceil(renderedCoverHeight && (bannerHeight - renderedCoverHeight) / gapLength), [
-		renderedCoverHeight,
-		bannerHeight,
-		gapLength
-	]);
-	const applyDynamicBg = (0, import_react.useMemo)(() => isAdaptY && gapHeight > 0 || !isAdaptY && gapWidth > 0, [
-		isAdaptY,
-		gapHeight,
-		gapWidth
-	]);
-	const getLeftGradientValues = (0, import_react.useCallback)(() => {
-		switch (backgroundPosition) {
-			case "right": return [
-				bannerWidth - renderedCoverWidth + offsetValues[0],
-				bannerWidth - renderedCoverWidth + offsetValues[1],
-				bannerWidth - renderedCoverWidth + offsetValues[2]
-			];
-			default: return [
-				gapWidth + offsetValues[0],
-				gapWidth + offsetValues[1],
-				gapWidth + offsetValues[2]
-			];
-		}
-	}, [
-		backgroundPosition,
-		bannerWidth,
-		renderedCoverWidth,
-		gapWidth
-	]);
-	const getRightGradientValues = (0, import_react.useCallback)(() => {
-		switch (backgroundPosition) {
-			case "left": return [
-				renderedCoverWidth - offsetValues[2],
-				renderedCoverWidth - offsetValues[1],
-				renderedCoverWidth - offsetValues[0]
-			];
-			default: return [
-				bannerWidth - gapWidth - offsetValues[2],
-				bannerWidth - gapWidth - offsetValues[1],
-				bannerWidth - gapWidth - offsetValues[0]
-			];
-		}
-	}, [
-		backgroundPosition,
-		bannerWidth,
-		renderedCoverWidth,
-		gapWidth
-	]);
-	const getTopGradientValues = (0, import_react.useCallback)(() => {
-		switch (backgroundPosition) {
-			case "bottom": return [
-				bannerHeight - renderedCoverHeight + offsetValues[0],
-				bannerHeight - renderedCoverHeight + offsetValues[1],
-				bannerHeight - renderedCoverHeight + offsetValues[2]
-			];
-			default: return [
-				gapHeight + offsetValues[0],
-				gapHeight + offsetValues[1],
-				gapHeight + offsetValues[2]
-			];
-		}
-	}, [
-		backgroundPosition,
-		bannerHeight,
-		renderedCoverHeight,
-		gapHeight
-	]);
-	const getBottomGradientValues = (0, import_react.useCallback)(() => {
-		switch (backgroundPosition) {
-			case "top": return [
-				renderedCoverHeight - offsetValues[2],
-				renderedCoverHeight - offsetValues[1],
-				renderedCoverHeight - offsetValues[0]
-			];
-			default: return [
-				bannerHeight - gapHeight - offsetValues[2],
-				bannerHeight - gapHeight - offsetValues[1],
-				bannerHeight - gapHeight - offsetValues[0]
-			];
-		}
-	}, [
-		backgroundPosition,
-		bannerHeight,
-		renderedCoverHeight,
-		gapHeight
-	]);
-	const backgroundImage = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		if (!((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) || !((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height)) return "";
-		const leftGradientValues = getLeftGradientValues();
-		const rightGradientValues = getRightGradientValues();
-		const topGradientValues = getTopGradientValues();
-		const bottomGradientValues = getBottomGradientValues();
-		const generateLinearGradient = ({ isVertical, startGradientValues, endGradientValues, startRGB, endRGB }) => {
-			let startColor, endColor;
-			if (startGradientValues && endGradientValues && startRGB && endRGB) {
-				startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
-				endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
-			} else if (startGradientValues && startRGB) startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
-else if (endGradientValues && endRGB) startColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
-			return `linear-gradient(${isVertical ? "180deg" : "90deg"} ${startColor ? `,${startColor}` : ""} ${endColor ? `,${endColor}` : ""}), url(${img})`;
+//#region src/banner.js
+var require_banner = __commonJS({ "src/banner.js"(exports) {
+	var __createBinding = exports && exports.__createBinding || (Object.create ? function(o, m, k, k2) {
+		if (k2 === undefined) k2 = k;
+		var desc = Object.getOwnPropertyDescriptor(m, k);
+		if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) desc = {
+			enumerable: true,
+			get: function() {
+				return m[k];
+			}
 		};
-		return generateLinearGradient(Object.assign(Object.assign({ isVertical: isAdaptY }, ([
-			"center",
+		Object.defineProperty(o, k2, desc);
+	} : function(o, m, k, k2) {
+		if (k2 === undefined) k2 = k;
+		o[k2] = m[k];
+	});
+	var __setModuleDefault = exports && exports.__setModuleDefault || (Object.create ? function(o, v) {
+		Object.defineProperty(o, "default", {
+			enumerable: true,
+			value: v
+		});
+	} : function(o, v) {
+		o["default"] = v;
+	});
+	var __importStar = exports && exports.__importStar || function() {
+		var ownKeys = function(o) {
+			ownKeys = Object.getOwnPropertyNames || function(o$1) {
+				var ar = [];
+				for (var k in o$1) if (Object.prototype.hasOwnProperty.call(o$1, k)) ar[ar.length] = k;
+				return ar;
+			};
+			return ownKeys(o);
+		};
+		return function(mod) {
+			if (mod && mod.__esModule) return mod;
+			var result = {};
+			if (mod != null) {
+				for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+			}
+			__setModuleDefault(result, mod);
+			return result;
+		};
+	}();
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = ResponsiveBanner$1;
+	const sdk_1 = (init_dist(), __toCommonJS(dist_exports));
+	const image_color_utils_1 = (init_index_es(), __toCommonJS(index_es_exports));
+	const react_1 = __importStar(require_react());
+	const offsetValues = [
+		2,
+		20,
+		120
+	];
+	const filterWidth = 50;
+	const filterOffset = filterWidth / 2;
+	const getFinalColor = (rgb) => {
+		if (!rgb) return "#fff";
+		const rgbArr = rgb.split(",");
+		const hsl = (0, image_color_utils_1.rgb2hsv)([
+			parseInt(rgbArr[0]),
+			parseInt(rgbArr[1]),
+			parseInt(rgbArr[2])
+		]);
+		return (0, image_color_utils_1.isDeepColorByHsv)(hsl) ? "#000" : "#fff";
+	};
+	const debounce = (fn, delay) => {
+		let timer;
+		return function(...args) {
+			clearTimeout(timer);
+			timer = setTimeout(() => {
+				fn.apply(this, args);
+			}, delay);
+		};
+	};
+	function ResponsiveBanner$1(props) {
+		var _a, _b, _c, _d, _e, _f;
+		const { width = "100%", height = "100%", img, backgroundPosition = "center", style, className } = props;
+		const conRef = (0, react_1.useRef)(null);
+		const [mounted, setMounted] = (0, react_1.useState)(0);
+		const bannerWidth = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1;
+			return !mounted ? 0 : width === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetWidth) || 0 : width;
+		}, [
+			width,
+			conRef,
+			mounted
+		]);
+		const bannerHeight = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1;
+			return !mounted ? 0 : height === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetHeight) || 0 : height;
+		}, [
+			height,
+			conRef,
+			mounted
+		]);
+		const [coverInfo, setCoverInfo] = (0, react_1.useState)({
+			left: "",
+			right: "",
+			bottom: "",
+			top: ""
+		});
+		const isAdaptY = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1, _c$1, _d$1;
+			return !!(((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) && ((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) && ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width) / bannerWidth > ((_d$1 = coverInfo.image) === null || _d$1 === void 0 ? void 0 : _d$1.height) / bannerHeight);
+		}, [
+			(_a = coverInfo.image) === null || _a === void 0 ? void 0 : _a.width,
+			(_b = coverInfo.image) === null || _b === void 0 ? void 0 : _b.height,
+			bannerWidth,
+			bannerHeight
+		]);
+		const renderedCoverWidth = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1, _c$1;
+			return isAdaptY || !((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) ? bannerWidth : Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.width) * bannerHeight / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.height));
+		}, [
+			isAdaptY,
+			(_c = coverInfo.image) === null || _c === void 0 ? void 0 : _c.width,
+			(_d = coverInfo.image) === null || _d === void 0 ? void 0 : _d.height,
+			bannerWidth,
+			bannerHeight
+		]);
+		const renderedCoverHeight = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1, _c$1;
+			return isAdaptY && ((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.height) ? Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) * bannerWidth / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width)) : bannerHeight;
+		}, [
+			isAdaptY,
+			(_e = coverInfo.image) === null || _e === void 0 ? void 0 : _e.width,
+			(_f = coverInfo.image) === null || _f === void 0 ? void 0 : _f.height,
+			bannerWidth,
+			bannerHeight
+		]);
+		const gapLength = (0, react_1.useMemo)(() => backgroundPosition === "center" || ["top", "bottom"].includes(backgroundPosition) && !isAdaptY || ["left", "right"].includes(backgroundPosition) && isAdaptY ? 2 : 1, [backgroundPosition, isAdaptY]);
+		const gapWidth = (0, react_1.useMemo)(() => Math.ceil(renderedCoverWidth && (bannerWidth - renderedCoverWidth) / gapLength), [
+			renderedCoverWidth,
+			bannerWidth,
+			gapLength
+		]);
+		const gapHeight = (0, react_1.useMemo)(() => Math.ceil(renderedCoverHeight && (bannerHeight - renderedCoverHeight) / gapLength), [
+			renderedCoverHeight,
+			bannerHeight,
+			gapLength
+		]);
+		const applyDynamicBg = (0, react_1.useMemo)(() => isAdaptY && gapHeight > 0 || !isAdaptY && gapWidth > 0, [
+			isAdaptY,
+			gapHeight,
+			gapWidth
+		]);
+		const getLeftGradientValues = (0, react_1.useCallback)(() => {
+			switch (backgroundPosition) {
+				case "right": return [
+					bannerWidth - renderedCoverWidth + offsetValues[0],
+					bannerWidth - renderedCoverWidth + offsetValues[1],
+					bannerWidth - renderedCoverWidth + offsetValues[2]
+				];
+				default: return [
+					gapWidth + offsetValues[0],
+					gapWidth + offsetValues[1],
+					gapWidth + offsetValues[2]
+				];
+			}
+		}, [
+			backgroundPosition,
+			bannerWidth,
+			renderedCoverWidth,
+			gapWidth
+		]);
+		const getRightGradientValues = (0, react_1.useCallback)(() => {
+			switch (backgroundPosition) {
+				case "left": return [
+					renderedCoverWidth - offsetValues[2],
+					renderedCoverWidth - offsetValues[1],
+					renderedCoverWidth - offsetValues[0]
+				];
+				default: return [
+					bannerWidth - gapWidth - offsetValues[2],
+					bannerWidth - gapWidth - offsetValues[1],
+					bannerWidth - gapWidth - offsetValues[0]
+				];
+			}
+		}, [
+			backgroundPosition,
+			bannerWidth,
+			renderedCoverWidth,
+			gapWidth
+		]);
+		const getTopGradientValues = (0, react_1.useCallback)(() => {
+			switch (backgroundPosition) {
+				case "bottom": return [
+					bannerHeight - renderedCoverHeight + offsetValues[0],
+					bannerHeight - renderedCoverHeight + offsetValues[1],
+					bannerHeight - renderedCoverHeight + offsetValues[2]
+				];
+				default: return [
+					gapHeight + offsetValues[0],
+					gapHeight + offsetValues[1],
+					gapHeight + offsetValues[2]
+				];
+			}
+		}, [
+			backgroundPosition,
+			bannerHeight,
+			renderedCoverHeight,
+			gapHeight
+		]);
+		const getBottomGradientValues = (0, react_1.useCallback)(() => {
+			switch (backgroundPosition) {
+				case "top": return [
+					renderedCoverHeight - offsetValues[2],
+					renderedCoverHeight - offsetValues[1],
+					renderedCoverHeight - offsetValues[0]
+				];
+				default: return [
+					bannerHeight - gapHeight - offsetValues[2],
+					bannerHeight - gapHeight - offsetValues[1],
+					bannerHeight - gapHeight - offsetValues[0]
+				];
+			}
+		}, [
+			backgroundPosition,
+			bannerHeight,
+			renderedCoverHeight,
+			gapHeight
+		]);
+		const backgroundImage = (0, react_1.useMemo)(() => {
+			var _a$1, _b$1;
+			if (!((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) || !((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height)) return "";
+			const leftGradientValues = getLeftGradientValues();
+			const rightGradientValues = getRightGradientValues();
+			const topGradientValues = getTopGradientValues();
+			const bottomGradientValues = getBottomGradientValues();
+			const generateLinearGradient = ({ isVertical, startGradientValues, endGradientValues, startRGB, endRGB }) => {
+				let startColor, endColor;
+				if (startGradientValues && endGradientValues && startRGB && endRGB) {
+					startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
+					endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
+				} else if (startGradientValues && startRGB) startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
+else if (endGradientValues && endRGB) startColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
+				return `linear-gradient(${isVertical ? "180deg" : "90deg"} ${startColor ? `,${startColor}` : ""} ${endColor ? `,${endColor}` : ""}), url(${img})`;
+			};
+			return generateLinearGradient(Object.assign(Object.assign({ isVertical: isAdaptY }, ([
+				"center",
+				"right",
+				"bottom"
+			].includes(backgroundPosition) || ["left"].includes(backgroundPosition) && isAdaptY || ["top"].includes(backgroundPosition) && !isAdaptY) && {
+				startGradientValues: isAdaptY ? topGradientValues : leftGradientValues,
+				startRGB: isAdaptY ? coverInfo.top : coverInfo.left
+			}), ([
+				"left",
+				"center",
+				"top"
+			].includes(backgroundPosition) || ["right"].includes(backgroundPosition) && isAdaptY || ["bottom"].includes(backgroundPosition) && !isAdaptY) && {
+				endGradientValues: isAdaptY ? bottomGradientValues : rightGradientValues,
+				endRGB: isAdaptY ? coverInfo.bottom : coverInfo.right
+			}));
+		}, [
+			coverInfo,
+			bannerWidth,
+			bannerHeight,
+			img,
+			backgroundPosition,
+			isAdaptY,
+			getLeftGradientValues,
+			getRightGradientValues,
+			getTopGradientValues,
+			getBottomGradientValues
+		]);
+		const containerStyle = Object.assign({
+			width,
+			height,
+			backgroundImage: applyDynamicBg ? backgroundImage : `url(${img})`,
+			position: "relative",
+			backgroundSize: "contain",
+			backgroundPosition,
+			overflow: "hidden",
+			backgroundRepeat: "no-repeat"
+		}, style);
+		const initCover = (0, react_1.useCallback)(() => {
+			(0, sdk_1.getMainColor)(img, [1, 40]).then((res) => {
+				setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
+					left: res.color,
+					image: res.image
+				}));
+			});
+			(0, sdk_1.getMainColor)(img, [-40, -1]).then((res) => {
+				setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
+					right: res.color,
+					image: res.image
+				}));
+			});
+			(0, sdk_1.getMainColor)(img, [-40, -1], "y").then((res) => {
+				setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
+					bottom: res.color,
+					image: res.image
+				}));
+			});
+			(0, sdk_1.getMainColor)(img, [1, 40], "y").then((res) => {
+				setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
+					top: res.color,
+					image: res.image
+				}));
+			});
+		}, [img]);
+		(0, react_1.useEffect)(() => {
+			initCover();
+			const fn = debounce(() => {
+				setMounted((origin) => origin + 1);
+				initCover();
+			}, 30);
+			window.addEventListener("resize", fn);
+			return () => {
+				window.removeEventListener("resize", fn);
+			};
+		}, [initCover]);
+		const getTop = (position) => {
+			if (position === "top") return isAdaptY ? gapHeight - filterOffset : 0;
+else if (position === "bottom") return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset : renderedCoverHeight - filterOffset : 0;
+			return 0;
+		};
+		const getLeft = (position) => {
+			if (position === "left") return isAdaptY ? 0 : gapWidth - filterOffset;
+else if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - filterOffset;
+			return 0;
+		};
+		const getFilterStyle = (position) => {
+			return {
+				position: "absolute",
+				top: getTop(position),
+				left: getLeft(position),
+				width: isAdaptY ? "100%" : filterWidth,
+				height: isAdaptY ? filterWidth : "100%",
+				zIndex: "inherit",
+				filter: "blur(30px)",
+				opacity: .7,
+				backgroundColor: `rgb(${coverInfo[position || "left"]})`
+			};
+		};
+		(0, react_1.useLayoutEffect)(() => {
+			var _a$1;
+			setMounted((origin) => origin + 1);
+			const observer = new ResizeObserver(() => {
+				setMounted((origin) => origin + 1);
+			});
+			((_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) && observer.observe(conRef.current.parentElement);
+			return () => {
+				observer.disconnect();
+			};
+		}, []);
+		return react_1.default.createElement("div", {
+			ref: conRef,
+			style: containerStyle,
+			className
+		}, applyDynamicBg && react_1.default.createElement(react_1.default.Fragment, null, [
 			"right",
+			"center",
+			"top",
 			"bottom"
-		].includes(backgroundPosition) || ["left"].includes(backgroundPosition) && isAdaptY || ["top"].includes(backgroundPosition) && !isAdaptY) && {
-			startGradientValues: isAdaptY ? topGradientValues : leftGradientValues,
-			startRGB: isAdaptY ? coverInfo.top : coverInfo.left
-		}), ([
+		].includes(backgroundPosition) && !isAdaptY && react_1.default.createElement("span", { style: getFilterStyle("left") }), [
 			"left",
 			"center",
-			"top"
-		].includes(backgroundPosition) || ["right"].includes(backgroundPosition) && isAdaptY || ["bottom"].includes(backgroundPosition) && !isAdaptY) && {
-			endGradientValues: isAdaptY ? bottomGradientValues : rightGradientValues,
-			endRGB: isAdaptY ? coverInfo.bottom : coverInfo.right
-		}));
-	}, [
-		coverInfo,
-		bannerWidth,
-		bannerHeight,
-		img,
-		backgroundPosition,
-		isAdaptY,
-		getLeftGradientValues,
-		getRightGradientValues,
-		getTopGradientValues,
-		getBottomGradientValues
-	]);
-	const containerStyle = Object.assign({
-		width,
-		height,
-		backgroundImage: applyDynamicBg ? backgroundImage : `url(${img})`,
-		position: "relative",
-		backgroundSize: "contain",
-		backgroundPosition,
-		overflow: "hidden",
-		backgroundRepeat: "no-repeat"
-	}, style);
-	const initCover = (0, import_react.useCallback)(() => {
-		getMainColor(img, [1, 40]).then((res) => {
-			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
-				left: res.color,
-				image: res.image
-			}));
-		});
-		getMainColor(img, [-40, -1]).then((res) => {
-			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
-				right: res.color,
-				image: res.image
-			}));
-		});
-		getMainColor(img, [-40, -1], "y").then((res) => {
-			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
-				bottom: res.color,
-				image: res.image
-			}));
-		});
-		getMainColor(img, [1, 40], "y").then((res) => {
-			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
-				top: res.color,
-				image: res.image
-			}));
-		});
-	}, [img]);
-	(0, import_react.useEffect)(() => {
-		initCover();
-		const fn = debounce(() => {
-			setMounted((origin) => origin + 1);
-			initCover();
-		}, 30);
-		window.addEventListener("resize", fn);
-		return () => {
-			window.removeEventListener("resize", fn);
-		};
-	}, [initCover]);
-	const getTop = (position) => {
-		if (position === "top") return isAdaptY ? gapHeight - filterOffset : 0;
-else if (position === "bottom") return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset : renderedCoverHeight - filterOffset : 0;
-		return 0;
-	};
-	const getLeft = (position) => {
-		if (position === "left") return isAdaptY ? 0 : gapWidth - filterOffset;
-else if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - filterOffset;
-		return 0;
-	};
-	const getFilterStyle = (position) => {
-		return {
-			position: "absolute",
-			top: getTop(position),
-			left: getLeft(position),
-			width: isAdaptY ? "100%" : filterWidth,
-			height: isAdaptY ? filterWidth : "100%",
-			zIndex: "inherit",
-			filter: "blur(30px)",
-			opacity: .7,
-			backgroundColor: `rgb(${coverInfo[position || "left"]})`
-		};
-	};
-	(0, import_react.useLayoutEffect)(() => {
-		var _a$1;
-		setMounted((origin) => origin + 1);
-		const observer = new ResizeObserver(() => {
-			setMounted((origin) => origin + 1);
-		});
-		((_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) && observer.observe(conRef.current.parentElement);
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
-	return import_react.default.createElement("div", {
-		ref: conRef,
-		style: containerStyle,
-		className
-	}, applyDynamicBg && import_react.default.createElement(import_react.default.Fragment, null, [
-		"right",
-		"center",
-		"top",
-		"bottom"
-	].includes(backgroundPosition) && !isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("left") }), [
-		"left",
-		"center",
-		"top",
-		"bottom"
-	].includes(backgroundPosition) && !isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("right") }), [
-		"bottom",
-		"center",
-		"left",
-		"right"
-	].includes(backgroundPosition) && isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("top") }), [
-		"top",
-		"center",
-		"left",
-		"right"
-	].includes(backgroundPosition) && isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("bottom") })));
-}
+			"top",
+			"bottom"
+		].includes(backgroundPosition) && !isAdaptY && react_1.default.createElement("span", { style: getFilterStyle("right") }), [
+			"bottom",
+			"center",
+			"left",
+			"right"
+		].includes(backgroundPosition) && isAdaptY && react_1.default.createElement("span", { style: getFilterStyle("top") }), [
+			"top",
+			"center",
+			"left",
+			"right"
+		].includes(backgroundPosition) && isAdaptY && react_1.default.createElement("span", { style: getFilterStyle("bottom") })));
+	}
+} });
 
 //#endregion
 //#region src/index.ts
-var src_default = ResponsiveBanner;
+var import_banner = __toESM(require_banner());
+var src_default = import_banner.default;
 
 //#endregion
 export { src_default as default };
