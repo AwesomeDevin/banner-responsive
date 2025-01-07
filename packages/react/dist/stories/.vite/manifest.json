@@ -1,0 +1,146 @@
+{
+  "../../node_modules/.pnpm/@vitdoc+runtime@1.6.3_@babel+core@7.26.0_@babel+template@7.25.9_@types+react@19.0.0_react-dom_fvznmpfnl4ojir6im5tt532fgi/node_modules/@vitdoc/runtime/dist/index.js": {
+    "file": "assets/index-BJuyNt5v.js",
+    "name": "index",
+    "src": "../../node_modules/.pnpm/@vitdoc+runtime@1.6.3_@babel+core@7.26.0_@babel+template@7.25.9_@types+react@19.0.0_react-dom_fvznmpfnl4ojir6im5tt532fgi/node_modules/@vitdoc/runtime/dist/index.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ],
+    "css": [
+      "assets/C8tR17bC.css"
+    ]
+  },
+  "../../node_modules/.pnpm/vitdoc@1.8.10_@babel+core@7.26.0_@babel+template@7.25.9_@swc+helpers@0.5.1_@types+react@19.0._iqdyecgo447db35kpr7nm5il4i/node_modules/vitdoc/client/hmr.ts": {
+    "file": "assets/hmr-BGas7vRn.js",
+    "name": "hmr",
+    "src": "../../node_modules/.pnpm/vitdoc@1.8.10_@babel+core@7.26.0_@babel+template@7.25.9_@swc+helpers@0.5.1_@types+react@19.0._iqdyecgo447db35kpr7nm5il4i/node_modules/vitdoc/client/hmr.ts",
+    "isDynamicEntry": true
+  },
+  "_banner-D5Q7cPnP.js": {
+    "file": "assets/banner-D5Q7cPnP.js",
+    "name": "banner",
+    "imports": [
+      "_index2-BaOVXFcn.js"
+    ]
+  },
+  "_index2-!~{00b}~.js": {
+    "file": "assets/B4Ixr1Fe.css",
+    "src": "_index2-!~{00b}~.js"
+  },
+  "_index2-BaOVXFcn.js": {
+    "file": "assets/index2-BaOVXFcn.js",
+    "name": "index2",
+    "imports": [
+      "index.html"
+    ],
+    "dynamicImports": [
+      "../../node_modules/.pnpm/vitdoc@1.8.10_@babel+core@7.26.0_@babel+template@7.25.9_@swc+helpers@0.5.1_@types+react@19.0._iqdyecgo447db35kpr7nm5il4i/node_modules/vitdoc/client/hmr.ts"
+    ],
+    "css": [
+      "assets/B4Ixr1Fe.css"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index-CntKg-mK.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "route-map.json",
+      "package.json",
+      "src/README.md",
+      "../../node_modules/.pnpm/@vitdoc+runtime@1.6.3_@babel+core@7.26.0_@babel+template@7.25.9_@types+react@19.0.0_react-dom_fvznmpfnl4ojir6im5tt532fgi/node_modules/@vitdoc/runtime/dist/index.js"
+    ]
+  },
+  "package.json": {
+    "file": "assets/package-01b3ve4D.js",
+    "name": "package",
+    "src": "package.json",
+    "isDynamicEntry": true
+  },
+  "route-map.json": {
+    "file": "assets/route-map-C1179vaL.js",
+    "name": "route-map",
+    "src": "route-map.json",
+    "isDynamicEntry": true
+  },
+  "src/README.md": {
+    "file": "assets/README-zJTPqHGv.js",
+    "name": "README",
+    "src": "src/README.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_index2-BaOVXFcn.js"
+    ],
+    "dynamicImports": [
+      "src/README.md?markdown-proxy&id=src-readme-demo-0",
+      "src/README.md?markdown-proxy&id=src-readme-demo-1",
+      "src/README.md?markdown-proxy&id=src-readme-demo-2",
+      "src/README.md?markdown-proxy&id=src-readme-demo-3",
+      "src/README.md?markdown-proxy&id=src-readme-demo-4",
+      "src/README.md?markdown-proxy&id=src-readme-demo-0",
+      "src/README.md?markdown-proxy&id=src-readme-demo-1",
+      "src/README.md?markdown-proxy&id=src-readme-demo-2",
+      "src/README.md?markdown-proxy&id=src-readme-demo-3",
+      "src/README.md?markdown-proxy&id=src-readme-demo-4"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-0": {
+    "file": "assets/README-BBJUZxie.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-0",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-D5Q7cPnP.js",
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-1": {
+    "file": "assets/README-Ct27OcjR.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-1",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-D5Q7cPnP.js",
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-2": {
+    "file": "assets/README-DAfzTEJE.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-2",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-D5Q7cPnP.js",
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-3": {
+    "file": "assets/README-r9CnaAwk.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-3",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-D5Q7cPnP.js",
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ]
+  },
+  "src/README.md?markdown-proxy&id=src-readme-demo-4": {
+    "file": "assets/README-BCBKwBb9.js",
+    "name": "README",
+    "src": "src/README.md?markdown-proxy&id=src-readme-demo-4",
+    "isDynamicEntry": true,
+    "imports": [
+      "_banner-D5Q7cPnP.js",
+      "_index2-BaOVXFcn.js",
+      "index.html"
+    ]
+  }
+}

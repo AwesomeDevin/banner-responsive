@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "CommonJS",
+    "lib": ["ES2022", "dom"],
+    "target": "ES6",
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "strict": true,
+    "removeComments": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "traceResolution": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "outDir": "build/typings",
+  },
+  "include": ["src"]
+}
