@@ -1,0 +1,40 @@
+{
+  "name": "banner-responsive",
+  "version": "1.0.0",
+  "description": "The perfect adaptive banner solution based on image-color-utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rolldown -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AwesomeDevin/banner-responsive.git"
+  },
+  "keywords": [
+    "banner",
+    "auto",
+    "responsive",
+    "layout"
+  ],
+  "devDependencies": {
+    "babel-loader": "^9.2.1",
+    "babel-plugin-react-compiler": "19.0.0-beta-201e55d-20241215",
+    "esbuild": "^0.24.0",
+    "esbuild-register": "^3.6.0",
+    "react-refresh": "^0.16.0",
+    "rolldown": "1.0.0-beta.1-commit.82b4e30",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "ts-node": "^10.9.2"
+  },
+  "author": "AwesomeDevin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AwesomeDevin/banner-responsive/issues"
+  },
+  "homepage": "https://github.com/AwesomeDevin/banner-responsive#readme",
+  "dependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@banner-responsive/react",
+  "version": "1.0.0",
+  "description": "The perfect adaptive banner solution, Make our banner adaptive to width and height, Ensure that the banner is fully visible Genaral Banner Effect",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "rolldown -c",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitdoc",
+    "docs:build": "vitdoc build"
+  },
+  "dependencies": {
+    "@banner-responsive/sdk": "workspace:*",
+    "image-color-utils": "^1.3.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
+    "vitdoc": "^1.8.10",
+    "vite-plugin-package-alias": "0.0.1-beta.3"
+  },
+  "author": "AwesomeDevin",
+  "license": "MIT"
+}
