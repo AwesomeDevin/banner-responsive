@@ -13,6 +13,7 @@
       "name": "@banner-responsive/sdk",
       "relativeDir": "/packages/sdk",
       "diffFiles": [
+        "/packages/sdk/package.json",
         "/packages/sdk/src/index.ts"
       ],
       "isDependOn": [
