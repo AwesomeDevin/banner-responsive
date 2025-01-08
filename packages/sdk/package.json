@@ -1,6 +1,6 @@
 {
   "name": "@banner-responsive/sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
