@@ -3,7 +3,7 @@ import { isDeepColorByHsv, rgb2hsv } from "image-color-utils";
 import React, { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
   // 用于计算渐变的偏移量
-const offsetValues = [2, 20, 120];
+const offsetValues = [4, 20, 120];
 
 // 计算滤镜的宽度
 const filterWidth = 50
@@ -28,18 +28,65 @@ const debounce = (fn: Function, delay: number) => {
 }
 
 export interface ResponsiveBannerProps {
+  /**
+   * Width of the banner
+   */
   width?: number;
+
+  /**
+   * Height of the banner
+   */
   height?: number;
+
+  /**
+   * Image url
+   */
   img: string;
+
+  /**
+   * Background Image position
+   */
   backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right';
+
+  /**
+   * Custom style
+   */
   style?: React.CSSProperties;
+
+  /**
+   * Custom class
+   */
   className?: string;
+
+  /**
+   * Children
+   */
   children?: React.ReactNode;
+
+  // /**
+  //  * Offset
+  //  */
+  // offset?: number;
+
+  /**
+   * Alt
+   */
+  alt?: string;
 }
 
 function ResponsiveBanner(props: ResponsiveBannerProps) {
 
-  const { width = '100%' , height = '100%', img, backgroundPosition = 'center', style, className, children } = props;
+  const { 
+    width = '100%',
+    height = '100%',
+    img,
+    backgroundPosition = 'center',
+    style,
+    className,
+    // offset = 0,
+    alt,
+    children 
+  } = props;
 
   const conRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(0);
@@ -84,7 +131,7 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
   // 渲染的图片宽高
   const renderedCoverWidth = useMemo(()=>isAdaptY || !coverInfo.image?.width
   ? bannerWidth
-  : Math.floor((coverInfo.image?.width * bannerHeight) / coverInfo.image?.height),[
+  : Math.floor((coverInfo.image?.width * bannerHeight) / (coverInfo.image?.height)),[
     isAdaptY,
     coverInfo.image?.width,
     coverInfo.image?.height,
@@ -213,6 +260,8 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     ])
 
   const backgroundImage = useMemo(()=>{
+
+
     if(!coverInfo.image?.width || !coverInfo.image?.height) return ''
 
 
@@ -265,9 +314,11 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
         )} ${basic + 100}px`
       }
 
-      return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''}), url(${img})`;
-    }
 
+      return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''}), url(${img})`;
+      // return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''})`;
+
+    }
 
 
     return generateLinearGradient({
@@ -295,7 +346,7 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     getBottomGradientValues,
   ])
 
-  
+  console.log('backgroundImage',backgroundImage, applyDynamicBg)
 
   const containerStyle = {
     width,
@@ -410,7 +461,35 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     };
   },[])
 
+  const imgStyle = {
+    width: renderedCoverWidth,
+    height: renderedCoverHeight,
+    position: 'absolute' as 'absolute',
+    zIndex: -1,
+    ...backgroundPosition === 'center' && {
+      left: gapWidth,
+      top: gapHeight,
+    },
+    ...backgroundPosition === 'top' && {
+      left: gapHeight,
+      top: 0,
+    },
+    ...backgroundPosition === 'bottom' && {
+      left: gapHeight,
+      bottom: 0,
+    },
+    ...backgroundPosition === 'left' && {
+      left: 0,
+      top: gapHeight,
+    },
+    ...backgroundPosition === 'right' && {
+      right: 0,
+      top: gapHeight,
+    },
+  }
+
   return <div ref={conRef} style={containerStyle} className={className}>
+    <img src={img} alt={alt || 'Banner'} style={imgStyle}/>
     {applyDynamicBg && (
         <>
           {(['right','center', 'top','bottom'].includes(backgroundPosition)) && !isAdaptY && <span

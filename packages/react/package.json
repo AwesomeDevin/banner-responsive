@@ -1,6 +1,6 @@
 {
   "name": "@banner-responsive/react",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "The perfect adaptive banner solution, Make our banner adaptive to width and height, Ensure that the banner is fully visible Genaral Banner Effect",
   "main": "build/cjs/index.js",
   "module": "build/es/index.js",

@@ -1,4 +1,4 @@
-import { ImageColorUtils } from 'image-color-utils';
+import { ImageColorUtils, isDeepColorByHsv, rgb2hsv } from 'image-color-utils';
 
 export const getMainColor = (
   img: string,
@@ -65,4 +65,12 @@ export const getMainColor = (
     //   run()
     // }
   });
+};
+
+
+export const getFinalColor = (rgb: string) => {
+  if (!rgb) return '#fff';
+  const rgbArr = rgb.split(',');
+  const hsl = rgb2hsv([parseInt(rgbArr[0]), parseInt(rgbArr[1]), parseInt(rgbArr[2])]);
+  return isDeepColorByHsv(hsl) ? '#000' : '#fff';
 };
