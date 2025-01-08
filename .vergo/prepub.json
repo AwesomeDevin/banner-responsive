@@ -5,7 +5,6 @@
       "relativeDir": "/packages/react",
       "diffFiles": [
         "/packages/react/package.json",
-        "/packages/react/rolldown.config.js",
         "/packages/react/src/index.tsx"
       ],
       "isDependOn": []
