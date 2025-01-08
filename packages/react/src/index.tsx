@@ -346,8 +346,6 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     getBottomGradientValues,
   ])
 
-  console.log('backgroundImage',backgroundImage, applyDynamicBg)
-
   const containerStyle = {
     width,
     height,
