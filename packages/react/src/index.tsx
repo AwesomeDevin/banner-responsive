@@ -464,30 +464,33 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     height: renderedCoverHeight,
     position: 'absolute' as 'absolute',
     zIndex: -1,
-    ...backgroundPosition === 'center' && {
-      left: gapWidth,
-      top: gapHeight,
-    },
-    ...backgroundPosition === 'top' && {
-      left: gapHeight,
-      top: 0,
-    },
-    ...backgroundPosition === 'bottom' && {
-      left: gapHeight,
-      bottom: 0,
-    },
-    ...backgroundPosition === 'left' && {
-      left: 0,
-      top: gapHeight,
-    },
-    ...backgroundPosition === 'right' && {
-      right: 0,
-      top: gapHeight,
-    },
+    left: -document.documentElement.clientWidth,
+    top: -document.documentElement.clientHeight,
+    // ...backgroundPosition === 'center' && {
+    //   left: gapWidth,
+    //   top: gapHeight,
+    // },
+    // ...backgroundPosition === 'top' && {
+    //   left: gapHeight,
+    //   top: 0,
+    // },
+    // ...backgroundPosition === 'bottom' && {
+    //   left: gapHeight,
+    //   bottom: 0,
+    // },
+    // ...backgroundPosition === 'left' && {
+    //   left: 0,
+    //   top: gapHeight,
+    // },
+    // ...backgroundPosition === 'right' && {
+    //   right: 0,
+    //   top: gapHeight,
+    // },
+    
   }
 
   return <div ref={conRef} style={containerStyle} className={className}>
-    <img src={img} alt={alt || 'Banner'} style={imgStyle}/>
+    {img && <img src={img} alt={alt || 'Banner'} style={imgStyle}/>}
     {applyDynamicBg && (
         <>
           {(['right','center', 'top','bottom'].includes(backgroundPosition)) && !isAdaptY && <span
