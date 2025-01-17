@@ -2,7 +2,7 @@ import { getMainColor } from "@banner-responsive/sdk";
 import { isDeepColorByHsv, rgb2hsv } from "image-color-utils";
 import React, { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-  // 用于计算渐变的偏移量
+// 用于计算渐变的偏移量
 const offsetValues = [4, 20, 120];
 
 // 计算滤镜的宽度
@@ -26,6 +26,15 @@ const debounce = (fn: Function, delay: number) => {
     }, delay);
   };
 }
+
+export interface ICoverInfo {
+  left: string;
+  right: string;
+  bottom: string;
+  top: string;
+  image: HTMLImageElement;
+}
+
 
 export interface ResponsiveBannerProps {
   /**
@@ -72,11 +81,17 @@ export interface ResponsiveBannerProps {
    * Alt
    */
   alt?: string;
+
+
+  /**
+   * Preset Cover info
+   */
+  presetCoverInfo?: ICoverInfo;
 }
 
 function ResponsiveBanner(props: ResponsiveBannerProps) {
 
-  const { 
+  const {
     width = '100%',
     height = '100%',
     img,
@@ -85,24 +100,25 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     className,
     // offset = 0,
     alt,
-    children 
+    children,
+    presetCoverInfo,
   } = props;
 
   const conRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(0);
 
   // 实际的banner宽高
-  const bannerWidth = useMemo(()=>!mounted ? 0 : width === '100%' ? conRef.current?.parentElement?.offsetWidth || 0 : width,[
+  const bannerWidth = useMemo(() => !mounted ? 0 : width === '100%' ? conRef.current?.parentElement?.offsetWidth || 0 : width, [
     width,
     conRef,
     mounted
   ])
-  const bannerHeight = useMemo(()=>!mounted ? 0 : height === '100%'  ? conRef.current?.parentElement?.offsetHeight || 0 : height,[
+  const bannerHeight = useMemo(() => !mounted ? 0 : height === '100%' ? conRef.current?.parentElement?.offsetHeight || 0 : height, [
     height,
     conRef,
     mounted
   ])
-  
+
 
 
   const [coverInfo, setCoverInfo] = useState<{
@@ -111,7 +127,7 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     bottom: string;
     top: string
     image?: HTMLImageElement;
-  }>({
+  }>(presetCoverInfo || {
     left: '',
     right: '',
     bottom: '',
@@ -121,26 +137,26 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
 
 
   // 是否适应Y轴
-  const isAdaptY =  useMemo(()=>!!(coverInfo.image?.width && coverInfo.image?.height && coverInfo.image?.width / bannerWidth > coverInfo.image?.height / bannerHeight),[
+  const isAdaptY = useMemo(() => !!(coverInfo.image?.width && coverInfo.image?.height && coverInfo.image?.width / bannerWidth > coverInfo.image?.height / bannerHeight), [
     coverInfo.image?.width,
     coverInfo.image?.height,
     bannerWidth,
     bannerHeight,
   ])
-  
+
   // 渲染的图片宽高
-  const renderedCoverWidth = useMemo(()=>isAdaptY || !coverInfo.image?.width
-  ? bannerWidth
-  : Math.floor((coverInfo.image?.width * bannerHeight) / (coverInfo.image?.height)),[
+  const renderedCoverWidth = useMemo(() => isAdaptY || !coverInfo.image?.width
+    ? bannerWidth
+    : Math.floor((coverInfo.image?.width * bannerHeight) / (coverInfo.image?.height)), [
     isAdaptY,
     coverInfo.image?.width,
     coverInfo.image?.height,
     bannerWidth,
     bannerHeight,
   ])
-  const renderedCoverHeight = useMemo(()=> isAdaptY && coverInfo.image?.height
-  ? Math.floor((coverInfo.image?.height * bannerWidth) / coverInfo.image?.width)
-  : bannerHeight,[
+  const renderedCoverHeight = useMemo(() => isAdaptY && coverInfo.image?.height
+    ? Math.floor((coverInfo.image?.height * bannerWidth) / coverInfo.image?.width)
+    : bannerHeight, [
     isAdaptY,
     coverInfo.image?.width,
     coverInfo.image?.height,
@@ -149,21 +165,21 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
   ])
 
   // 为1时，表示只有一边有空白，为2时表示两边都有空白
-  const gapLength = useMemo(()=>(
-    backgroundPosition === 'center' 
-    || ['top','bottom'].includes(backgroundPosition) && !isAdaptY 
-    || ['left','right'].includes(backgroundPosition) && isAdaptY) ? 2 : 1
-  ,[backgroundPosition,isAdaptY])
-  
+  const gapLength = useMemo(() => (
+    backgroundPosition === 'center'
+    || ['top', 'bottom'].includes(backgroundPosition) && !isAdaptY
+    || ['left', 'right'].includes(backgroundPosition) && isAdaptY) ? 2 : 1
+    , [backgroundPosition, isAdaptY])
+
   // 计算空白区域的宽度
-  const gapWidth = useMemo(()=>Math.ceil(renderedCoverWidth && (bannerWidth - renderedCoverWidth) / gapLength),[
+  const gapWidth = useMemo(() => Math.ceil(renderedCoverWidth && (bannerWidth - renderedCoverWidth) / gapLength), [
     renderedCoverWidth,
     bannerWidth,
     gapLength
   ])
-  
+
   // 计算空白区域的高度
-  const gapHeight = useMemo(()=>Math.ceil(renderedCoverHeight && (bannerHeight - renderedCoverHeight) / gapLength),[
+  const gapHeight = useMemo(() => Math.ceil(renderedCoverHeight && (bannerHeight - renderedCoverHeight) / gapLength), [
     renderedCoverHeight,
     bannerHeight,
     gapLength
@@ -171,7 +187,7 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
 
 
   // 是否需要应用动态背景
-  const applyDynamicBg = useMemo(()=>isAdaptY && gapHeight > 0 || !isAdaptY && gapWidth > 0,[
+  const applyDynamicBg = useMemo(() => isAdaptY && gapHeight > 0 || !isAdaptY && gapWidth > 0, [
     isAdaptY,
     gapHeight,
     gapWidth
@@ -179,90 +195,90 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
 
 
 
-    const getLeftGradientValues = useCallback(() => {
-      switch (backgroundPosition) {
-        case 'right':
-          return [
-            bannerWidth - renderedCoverWidth + offsetValues[0],
-            bannerWidth - renderedCoverWidth + offsetValues[1],
-            bannerWidth - renderedCoverWidth + offsetValues[2],
-          ];
-        default:
-          return [gapWidth + offsetValues[0], gapWidth + offsetValues[1], gapWidth + offsetValues[2]];
-      }
-    },[
-      backgroundPosition,
-      bannerWidth,
-      renderedCoverWidth,
-      gapWidth,
-    ])
+  const getLeftGradientValues = useCallback(() => {
+    switch (backgroundPosition) {
+      case 'right':
+        return [
+          bannerWidth - renderedCoverWidth + offsetValues[0],
+          bannerWidth - renderedCoverWidth + offsetValues[1],
+          bannerWidth - renderedCoverWidth + offsetValues[2],
+        ];
+      default:
+        return [gapWidth + offsetValues[0], gapWidth + offsetValues[1], gapWidth + offsetValues[2]];
+    }
+  }, [
+    backgroundPosition,
+    bannerWidth,
+    renderedCoverWidth,
+    gapWidth,
+  ])
 
-    const getRightGradientValues = useCallback(() => {
-      switch (backgroundPosition) {
-        case 'left':
-          return [
-            renderedCoverWidth - offsetValues[2],
-            renderedCoverWidth - offsetValues[1],
-            renderedCoverWidth - offsetValues[0],
-          ];
-        default:
-          return [
-            bannerWidth - gapWidth - offsetValues[2],
-            bannerWidth - gapWidth - offsetValues[1],
-            bannerWidth - gapWidth - offsetValues[0],
-          ];
-      }
-    },[
-      backgroundPosition,
-      bannerWidth,
-      renderedCoverWidth,
-      gapWidth,
-    ])
+  const getRightGradientValues = useCallback(() => {
+    switch (backgroundPosition) {
+      case 'left':
+        return [
+          renderedCoverWidth - offsetValues[2],
+          renderedCoverWidth - offsetValues[1],
+          renderedCoverWidth - offsetValues[0],
+        ];
+      default:
+        return [
+          bannerWidth - gapWidth - offsetValues[2],
+          bannerWidth - gapWidth - offsetValues[1],
+          bannerWidth - gapWidth - offsetValues[0],
+        ];
+    }
+  }, [
+    backgroundPosition,
+    bannerWidth,
+    renderedCoverWidth,
+    gapWidth,
+  ])
 
-    const getTopGradientValues = useCallback(() => {
-      switch (backgroundPosition) {
-        case 'bottom':
-          return [
-            bannerHeight - renderedCoverHeight + offsetValues[0],
-            bannerHeight - renderedCoverHeight + offsetValues[1],
-            bannerHeight - renderedCoverHeight + offsetValues[2],
-          ];
-        default:
-          return [gapHeight + offsetValues[0], gapHeight + offsetValues[1], gapHeight + offsetValues[2]];
-      }
-    },[
-      backgroundPosition,
-      bannerHeight,
-      renderedCoverHeight,
-      gapHeight,
-    ])
+  const getTopGradientValues = useCallback(() => {
+    switch (backgroundPosition) {
+      case 'bottom':
+        return [
+          bannerHeight - renderedCoverHeight + offsetValues[0],
+          bannerHeight - renderedCoverHeight + offsetValues[1],
+          bannerHeight - renderedCoverHeight + offsetValues[2],
+        ];
+      default:
+        return [gapHeight + offsetValues[0], gapHeight + offsetValues[1], gapHeight + offsetValues[2]];
+    }
+  }, [
+    backgroundPosition,
+    bannerHeight,
+    renderedCoverHeight,
+    gapHeight,
+  ])
 
-    const getBottomGradientValues = useCallback(() => {
-      switch (backgroundPosition) {
-        case 'top':
-          return [
-            renderedCoverHeight - offsetValues[2],
-            renderedCoverHeight - offsetValues[1],
-            renderedCoverHeight - offsetValues[0],
-          ];
-        default:
-          return [
-            bannerHeight - gapHeight - offsetValues[2],
-            bannerHeight - gapHeight - offsetValues[1],
-            bannerHeight - gapHeight - offsetValues[0],
+  const getBottomGradientValues = useCallback(() => {
+    switch (backgroundPosition) {
+      case 'top':
+        return [
+          renderedCoverHeight - offsetValues[2],
+          renderedCoverHeight - offsetValues[1],
+          renderedCoverHeight - offsetValues[0],
+        ];
+      default:
+        return [
+          bannerHeight - gapHeight - offsetValues[2],
+          bannerHeight - gapHeight - offsetValues[1],
+          bannerHeight - gapHeight - offsetValues[0],
         ]
-      }
-    },[
-      backgroundPosition,
-      bannerHeight,
-      renderedCoverHeight,
-      gapHeight,
-    ])
+    }
+  }, [
+    backgroundPosition,
+    bannerHeight,
+    renderedCoverHeight,
+    gapHeight,
+  ])
 
-  const backgroundImage = useMemo(()=>{
+  const backgroundImage = useMemo(() => {
 
 
-    if(!coverInfo.image?.width || !coverInfo.image?.height) return ''
+    if (!coverInfo.image?.width || !coverInfo.image?.height) return ''
 
 
     const leftGradientValues = getLeftGradientValues();
@@ -289,33 +305,27 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
 
       const basic = isVertical ? bannerHeight : bannerWidth
 
-      if(startGradientValues && endGradientValues && startRGB && endRGB){
-        startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
-          startGradientValues[0]
-        }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${
-          startGradientValues[2]
-        }px`
+      if (startGradientValues && endGradientValues && startRGB && endRGB) {
+        startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]
+          }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${startGradientValues[2]
+          }px`
 
-        endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${
-          endGradientValues[1]
-        }px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${basic +
+        endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${endGradientValues[1]
+          }px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${basic +
           100}px`
-      } else if(startGradientValues && startRGB){
-        startColor =  `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${
-          startGradientValues[0]
-        }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${
-          startGradientValues[2]
-        }px`
-      }else if(endGradientValues && endRGB){
-        startColor = `transparent ${endGradientValues[0]}px, rgba(${
-          endRGB
-        }, 0.1) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(
-          endRGB,
-        )} ${basic + 100}px`
+      } else if (startGradientValues && startRGB) {
+        startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]
+          }px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${startGradientValues[2]
+          }px`
+      } else if (endGradientValues && endRGB) {
+        startColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB
+          }, 0.1) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(
+            endRGB,
+          )} ${basic + 100}px`
       }
 
 
-      return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''}), url(${img})`;
+      return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}` : ''} ${endColor ? `,${endColor}` : ''}), url(${img})`;
       // return `linear-gradient(${isVertical ? '180deg' : '90deg'} ${startColor ? `,${startColor}`:''} ${endColor ? `,${endColor}`:''})`;
 
     }
@@ -323,17 +333,17 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
 
     return generateLinearGradient({
       isVertical: isAdaptY,
-      ...(['center','right', 'bottom'].includes(backgroundPosition) || ['left'].includes(backgroundPosition) && isAdaptY || ['top'].includes(backgroundPosition) && !isAdaptY) && {
+      ...(['center', 'right', 'bottom'].includes(backgroundPosition) || ['left'].includes(backgroundPosition) && isAdaptY || ['top'].includes(backgroundPosition) && !isAdaptY) && {
         startGradientValues: isAdaptY ? topGradientValues : leftGradientValues,
         startRGB: isAdaptY ? coverInfo.top : coverInfo.left,
       },
-      ...(['left','center', 'top'].includes(backgroundPosition) || ['right'].includes(backgroundPosition) && isAdaptY || ['bottom'].includes(backgroundPosition) && !isAdaptY) && {
+      ...(['left', 'center', 'top'].includes(backgroundPosition) || ['right'].includes(backgroundPosition) && isAdaptY || ['bottom'].includes(backgroundPosition) && !isAdaptY) && {
         endGradientValues: isAdaptY ? bottomGradientValues : rightGradientValues,
         endRGB: isAdaptY ? coverInfo.bottom : coverInfo.right,
       },
     })
 
-  },[
+  }, [
     coverInfo,
     bannerWidth,
     bannerHeight,
@@ -369,7 +379,7 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
           image: res.image,
         }));
       })
-     
+
 
 
     getMainColor(img, [-40, -1]).then(res => {
@@ -395,38 +405,40 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
         image: res.image,
       }));
     });
-  },[img])
+  }, [img])
 
 
-  useEffect(()=>{
-    initCover();
 
+  useEffect(() => {
+    const run = () => {
+      !presetCoverInfo && initCover();
+    };
+    run();
 
     const fn = debounce(() => {
-      setMounted(origin=>origin+1)
-      initCover();
+      setMounted((origin) => origin + 1);
+      run();
     }, 30);
     window.addEventListener('resize', fn);
     return () => {
       window.removeEventListener('resize', fn);
     };
-
-  },[initCover])
+  }, [initCover, presetCoverInfo]);
 
   const getTop = (position?: 'left' | 'right' | 'top' | 'bottom') => {
 
-    if(position === 'top') {
+    if (position === 'top') {
       return isAdaptY ? gapHeight - filterOffset : 0
-    }else if(position === 'bottom' ){
-      return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset  :(renderedCoverHeight - filterOffset) : 0
+    } else if (position === 'bottom') {
+      return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset : (renderedCoverHeight - filterOffset) : 0
     }
     return 0
   }
 
   const getLeft = (position?: 'left' | 'right' | 'top' | 'bottom') => {
-    if(position === 'left') {
+    if (position === 'left') {
       return isAdaptY ? 0 : gapWidth - filterOffset
-    }else if(position === 'right' ){
+    } else if (position === 'right') {
       return isAdaptY ? 0 : bannerWidth - gapWidth - filterOffset
     }
     return 0
@@ -439,25 +451,32 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
       position: 'absolute' as 'absolute',
       top: getTop(position),
       left: getLeft(position),
-      width: isAdaptY ?  '100%' : filterWidth,
+      width: isAdaptY ? '100%' : filterWidth,
       height: isAdaptY ? filterWidth : '100%',
       zIndex: 'inherit',
       filter: 'blur(30px)',
       opacity: 0.7,
-      backgroundColor:`rgb(${coverInfo[position || 'left']})`,
+      backgroundColor: `rgb(${coverInfo[position || 'left']})`,
     }
   }
 
-  useLayoutEffect(()=>{
-    setMounted(origin=>origin+1)
-    const observer = new ResizeObserver(()=>{
-      setMounted(origin=>origin+1)
+  useLayoutEffect(() => {
+    setMounted(origin => origin + 1)
+    const observer = new ResizeObserver(() => {
+      setMounted(origin => origin + 1)
     });
     conRef.current?.parentElement && observer.observe(conRef.current.parentElement);
     return () => {
       observer.disconnect();
     };
-  },[])
+  }, [])
+
+
+  useEffect(() => {
+    if (presetCoverInfo) {
+      setCoverInfo(presetCoverInfo);
+    }
+  }, [presetCoverInfo]);
 
   const imgStyle = {
     width: renderedCoverWidth,
@@ -486,30 +505,30 @@ function ResponsiveBanner(props: ResponsiveBannerProps) {
     //   right: 0,
     //   top: gapHeight,
     // },
-    
+
   }
 
   return <div ref={conRef} style={containerStyle} className={className}>
-    {img && <img src={img} alt={alt || 'Banner'} style={imgStyle}/>}
+    {img && <img src={img} alt={alt || 'Banner'} style={imgStyle} />}
     {applyDynamicBg && (
-        <>
-          {(['right','center', 'top','bottom'].includes(backgroundPosition)) && !isAdaptY && <span
-            style={getFilterStyle('left')}
-          ></span>}
-          {(['left','center', 'top','bottom'].includes(backgroundPosition))&& !isAdaptY && <span
-            style={getFilterStyle('right')}
-          ></span>}
+      <>
+        {(['right', 'center', 'top', 'bottom'].includes(backgroundPosition)) && !isAdaptY && <span
+          style={getFilterStyle('left')}
+        ></span>}
+        {(['left', 'center', 'top', 'bottom'].includes(backgroundPosition)) && !isAdaptY && <span
+          style={getFilterStyle('right')}
+        ></span>}
 
-          {['bottom','center', 'left', 'right'].includes(backgroundPosition) && isAdaptY && <span
-            style={getFilterStyle('top')}
-          ></span>}
-          {['top','center', 'left', 'right'].includes(backgroundPosition) && isAdaptY && <span
-            style={getFilterStyle('bottom')}
-          ></span>}
-          
-        </>
-      )}
-      {children}
+        {['bottom', 'center', 'left', 'right'].includes(backgroundPosition) && isAdaptY && <span
+          style={getFilterStyle('top')}
+        ></span>}
+        {['top', 'center', 'left', 'right'].includes(backgroundPosition) && isAdaptY && <span
+          style={getFilterStyle('bottom')}
+        ></span>}
+
+      </>
+    )}
+    {children}
   </div>
 }
 
