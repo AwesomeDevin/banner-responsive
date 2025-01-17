@@ -5,6 +5,7 @@
       "relativeDir": "/packages/react",
       "diffFiles": [
         "/packages/react/package.json",
+        "/packages/react/src/README.md",
         "/packages/react/src/index.tsx"
       ],
       "isDependOn": []
