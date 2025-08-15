@@ -21,7 +21,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           overflow: 'hidden'
         }}
@@ -38,7 +38,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/gcp/lazada/caab1d56-6f25-4449-9ab5-277729c2d991_SG-3000-1524.jpg_2200x2200q80.jpg') no-repeat center" ,
           backgroundSize: 'cover'
@@ -55,7 +55,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/gcp/lazada/caab1d56-6f25-4449-9ab5-277729c2d991_SG-3000-1524.jpg_2200x2200q80.jpg') no-repeat center" ,
           backgroundSize: 'contain'
@@ -88,7 +88,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           overflow: 'hidden'
         }}
@@ -105,7 +105,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/gcp/lazada/3384ee66-6160-409e-aad0-174e031c0cd9_SG-8001-3750.jpg_2200x2200q80.jpg') no-repeat right" ,
           backgroundSize: 'cover'
@@ -122,7 +122,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/gcp/lazada/3384ee66-6160-409e-aad0-174e031c0cd9_SG-8001-3750.jpg_2200x2200q80.jpg') no-repeat right",
           backgroundSize: 'contain'
@@ -154,7 +154,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           overflow: 'hidden'
         }}
@@ -171,7 +171,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/tps/imgextra/i1/O1CN01x0Y38j22hDHsu3cgK_!!6000000007151-0-tps-2400-1215.jpg_2200x2200q80.jpg') no-repeat left" ,
           backgroundSize: 'cover'
@@ -188,7 +188,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: '30vh',
           background: "url('https://img.lazcdn.com/g/tps/imgextra/i1/O1CN01x0Y38j22hDHsu3cgK_!!6000000007151-0-tps-2400-1215.jpg_2200x2200q80.jpg') no-repeat left",
           backgroundSize: 'contain'
@@ -221,7 +221,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           overflow: 'hidden'
         }}
@@ -238,7 +238,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           background: "url('https://img.lazcdn.com/g/gcp/lazada/d6c294a7-f228-4be7-8fff-5d3af62d78d9_SG-2400-1215.png_2200x2200q80.png') no-repeat top" ,
           backgroundSize: 'cover'
@@ -255,7 +255,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           background: "url('https://img.lazcdn.com/g/gcp/lazada/d6c294a7-f228-4be7-8fff-5d3af62d78d9_SG-2400-1215.png_2200x2200q80.png') no-repeat top",
           backgroundSize: 'contain'
@@ -286,7 +286,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           overflow: 'hidden'
         }}
@@ -303,7 +303,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           background: "url('https://img.lazcdn.com/g/gcp/lazada/d6c294a7-f228-4be7-8fff-5d3af62d78d9_SG-2400-1215.png_2200x2200q80.png') no-repeat bottom" ,
           backgroundSize: 'cover'
@@ -320,7 +320,7 @@ ReactDOM.render(
           
           border: '1px solid #e5eafe',
           borderRadius: 18,
-          width: 1000,
+          width: '40vw',
           height: 750,
           background: "url('https://img.lazcdn.com/g/gcp/lazada/d6c294a7-f228-4be7-8fff-5d3af62d78d9_SG-2400-1215.png_2200x2200q80.png') no-repeat bottom",
           backgroundSize: 'contain'
@@ -339,20 +339,19 @@ ReactDOM.render(
 ### SDK - getMainColor
 
 ```tsx
-import Banner from '@banner-responsive/react';
-import { getMainColor } from '@banner-responsive/sdk'
+import Banner, { getMainColor } from '@banner-responsive/react';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 
 const Com = () => {
 
-  const [value,setValue ] = useState('https://img.lazcdn.com/g/gcp/lazada/3384ee66-6160-409e-aad0-174e031c0cd9_SG-8001-3750.jpg_2200x2200q80.jpg')
+  const [value,setValue ] = useState('https://img.lazcdn.com/g/ff/kf/S096b917ba3784e2383a2e7cd88697b33d.png_2200x2200q75.png_.webp')
   const [coverInfo,setCoverInfo] = useState({})
 
   const initColor = (img) => {
     // left color
-    getMainColor(img, [1, 40]).then((res) => {
+    getMainColor(img, [5, 20]).then((res) => {
       setCoverInfo((origin) => ({
         ...origin,
         left: res.color,
@@ -361,7 +360,7 @@ const Com = () => {
     });
 
     // right color
-    getMainColor(img, [-40, -1]).then((res) => {
+    getMainColor(img, [-20, -5]).then((res) => {
       setCoverInfo((origin) => ({
         ...origin,
         right: res.color,
@@ -370,7 +369,7 @@ const Com = () => {
     });
 
     // bottom color
-    getMainColor(img, [-40, -1], 'y').then((res) => {
+    getMainColor(img, [-20, -5], 'y').then((res) => {
       setCoverInfo((origin) => ({
         ...origin,
         bottom: res.color,
@@ -380,7 +379,7 @@ const Com = () => {
 
 
     // top color
-    getMainColor(img, [1, 40], 'y').then((res) => {
+    getMainColor(img, [5, 20], 'y').then((res) => {
       setCoverInfo((origin) => ({
         ...origin,
         top: res.color,

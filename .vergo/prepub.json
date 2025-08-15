@@ -6,7 +6,9 @@
       "diffFiles": [
         "/packages/react/package.json",
         "/packages/react/src/README.md",
-        "/packages/react/src/index.tsx"
+        "/packages/react/src/banner.tsx",
+        "/packages/react/src/index.ts",
+        "/packages/react/src/utils.ts"
       ],
       "isDependOn": []
     }
