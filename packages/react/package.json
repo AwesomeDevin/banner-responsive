@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.1.2",
-    "vitdoc": "^1.8.10",
-    "vite-plugin-package-alias": "0.0.1-beta.3"
+    "vitdoc": "^1.8.12",
+    "vite-plugin-package-alias": "0.0.1"
   },
   "author": "AwesomeDevin",
   "license": "MIT"

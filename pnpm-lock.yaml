@@ -47,7 +47,7 @@ importers:
         version: link:../sdk
       image-color-utils:
         specifier: ^1.3.2
-        version: 1.3.2
+        version: 1.3.3
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -59,11 +59,11 @@ importers:
         specifier: ^12.1.2
         version: 12.1.2(rollup@3.29.5)(tslib@2.8.1)(typescript@5.7.2)
       vitdoc:
-        specifier: ^1.8.10
-        version: 1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.1.3)(lightningcss@1.22.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+        specifier: ^1.8.12
+        version: 1.8.12(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.2.1)(lightningcss@1.22.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       vite-plugin-package-alias:
-        specifier: 0.0.1-beta.3
-        version: 0.0.1-beta.3(@types/node@14.18.63)(less@4.1.3)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0)
+        specifier: 0.0.1
+        version: 0.0.1(@types/node@14.18.63)(less@4.2.1)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0)
 
   packages/sdk:
     dependencies:
@@ -79,7 +79,7 @@ importers:
     devDependencies:
       vitdoc:
         specifier: ^1.8.10
-        version: 1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.2.1)(lightningcss@1.22.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+        version: 1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.1.3)(lightningcss@1.22.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
 
 packages:
 
@@ -2349,6 +2349,12 @@ packages:
       react: ^16.7.0 || ^17.0.2 || ^18.0.0
       react-dom: ^16.7.0 || ^17.0.2 || ^18.0.0
 
+  '@vitdoc/runtime@1.6.4':
+    resolution: {integrity: sha512-uAKKgQxvjV+vteczbDmToqhTCHhHsptC1/niDkNEOER43kzVzRbJdHA1T+hSfeVDmTJxWtbvrNSt91UnIXutHw==}
+    peerDependencies:
+      react: ^16.7.0 || ^17.0.2 || ^18.0.0
+      react-dom: ^16.7.0 || ^17.0.2 || ^18.0.0
+
   '@vitdoc/theme-default@2.2.1':
     resolution: {integrity: sha512-R/ua5ziaX+CfZZPA8dL2oNmCdD1YT+i9Vf9UpQT9S4ujNvATEggJurorgdUBBw0qpCyM2JgkrDkRk/CHFZDo/w==}
     peerDependencies:
@@ -2357,6 +2363,13 @@ packages:
 
   '@vitdoc/ui@1.6.2':
     resolution: {integrity: sha512-AoL8Kb68Lp1vpuEb7gi3xke2+goEFDsgwJyCHexLq96HFHdmQ4TeLYZ/OuLJL0OZCnTHTN/uW0O+/5i7Bbxf7g==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      react: ^16.7.0 || ^17.0.2 || ^18.0.0
+      react-dom: ^16.7.0 || ^17.0.2 || ^18.0.0
+
+  '@vitdoc/ui@1.7.0':
+    resolution: {integrity: sha512-C4Szlh53hf6ENEy2z2C5MNt6MxCuQhYtkaosecLXdpnIAaRSIv9/F7P/QbBJUDhMIzp1XH8hc+9j/ilQ4j4afw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       react: ^16.7.0 || ^17.0.2 || ^18.0.0
@@ -4366,6 +4379,10 @@ packages:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
 
+  fresh@2.0.0:
+    resolution: {integrity: sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==}
+    engines: {node: '>= 0.8'}
+
   from2@2.3.0:
     resolution: {integrity: sha512-OMcX/4IC/uqEPVgGeyfN22LJk6AZrMkRZHxcHBMBvHScDGgwTm2GT2Wkgtocyd3JfZffjj2kYUDXXII0Fk9W0g==}
 
@@ -4862,6 +4879,9 @@ packages:
 
   image-color-utils@1.3.2:
     resolution: {integrity: sha512-N7hyEKkm6q7c/ll0lObrrnmPo+8TiGF6MbVXVbmyb44zu4Il3/sUfCHeHn/drCR2DzyxYFBbJNA0LWihyqXbpA==}
+
+  image-color-utils@1.3.3:
+    resolution: {integrity: sha512-02plu3Ss6VuEiQ/hG/7zvKXixVij4f+U17UbkukVXgTdghzWE5eeSNUS4hsDBDocg1G++Txz6Fc1+DNIEKnfqw==}
 
   image-size@0.5.5:
     resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
@@ -5946,8 +5966,16 @@ packages:
     resolution: {integrity: sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==}
     engines: {node: '>= 0.6'}
 
+  mime-db@1.54.0:
+    resolution: {integrity: sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==}
+    engines: {node: '>= 0.6'}
+
   mime-types@2.1.35:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
+    engines: {node: '>= 0.6'}
+
+  mime-types@3.0.1:
+    resolution: {integrity: sha512-xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA==}
     engines: {node: '>= 0.6'}
 
   mime@1.6.0:
@@ -7728,8 +7756,8 @@ packages:
     resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
     engines: {node: '>= 0.8.0'}
 
-  send@1.1.0:
-    resolution: {integrity: sha512-v67WcEouB5GxbTWL/4NeToqcZiAWEq90N888fczVArY8A79J0L4FD7vj5hm3eUMua5EpoQ59wa/oovY6TLvRUA==}
+  send@1.2.0:
+    resolution: {integrity: sha512-uaW0WwXKpL9blXE2o0bRhoL2EGXIrZxQ2ZQ4mgcfoBxdFmQold+qWsD2jLrfZ0trjKL6vOw0j//eAwcALFjKSw==}
     engines: {node: '>= 18'}
 
   serialize-javascript@6.0.2:
@@ -8380,6 +8408,10 @@ packages:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
 
+  type-fest@4.31.0:
+    resolution: {integrity: sha512-yCxltHW07Nkhv/1F6wWBr8kz+5BGMfP+RbRSYFnegVb0qV/UMT0G0ElBloPVerqn4M2ZV80Ir1FtCcYv1cT6vQ==}
+    engines: {node: '>=16'}
+
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -8664,8 +8696,16 @@ packages:
       react: ^16.7.0 || ^17.0.2 || ^18.0.0
       react-dom: ^16.7.0 || ^17.0.2 || ^18.0.0
 
-  vite-plugin-package-alias@0.0.1-beta.3:
-    resolution: {integrity: sha512-XSEMaf3WHoK0X2BjzqPv8VuOdC7Mx0t+5gYoefERtnOJHFc74JTd2Df94RTs4gwJ6QGejx7H4pn4GFUhr8np9Q==}
+  vitdoc@1.8.12:
+    resolution: {integrity: sha512-OavqhWDip5cplUl6Z/ZhMwWXZJaut2/h4dhS8EziIiomV+3S8z5l17FdTmbRWa6ajbam7U2YaiDUvE/sK3diWQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      react: ^16.7.0 || ^17.0.2 || ^18.0.0
+      react-dom: ^16.7.0 || ^17.0.2 || ^18.0.0
+
+  vite-plugin-package-alias@0.0.1:
+    resolution: {integrity: sha512-3et2yZncpSwn6XgZ3W7p/SK3jRHnTQJoWVD2OX6RmrfdKpT9yS+Nf51wVwkYhxG9CrZIBJ7x8UF6t49+LNmmYA==}
 
   vite@4.5.2:
     resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
@@ -10939,7 +10979,7 @@ snapshots:
       - supports-color
       - terser
 
-  '@umijs/bundler-webpack@4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
+  '@umijs/bundler-webpack@4.4.4(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
     dependencies:
       '@svgr/core': 6.5.1
       '@svgr/plugin-jsx': 6.5.1(@svgr/core@6.5.1)
@@ -10949,46 +10989,12 @@ snapshots:
       '@umijs/bundler-utils': 4.4.4
       '@umijs/case-sensitive-paths-webpack-plugin': 1.0.1
       '@umijs/mfsu': 4.4.4
-      '@umijs/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      '@umijs/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/utils': 4.4.4
       cors: 2.8.5
       css-loader: 6.7.1(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       es5-imcompatible-versions: 0.1.90
       fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
-      jest-worker: 29.4.3
-      lightningcss: 1.22.1
-      node-libs-browser: 2.2.1
-      postcss: 8.4.49
-      postcss-preset-env: 7.5.0(postcss@8.4.49)
-      react-error-overlay: 6.0.9
-      react-refresh: 0.14.0
-    transitivePeerDependencies:
-      - '@types/webpack'
-      - sockjs-client
-      - supports-color
-      - type-fest
-      - typescript
-      - webpack
-      - webpack-dev-server
-      - webpack-hot-middleware
-      - webpack-plugin-serve
-
-  '@umijs/bundler-webpack@4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))':
-    dependencies:
-      '@svgr/core': 6.5.1
-      '@svgr/plugin-jsx': 6.5.1(@svgr/core@6.5.1)
-      '@svgr/plugin-svgo': 6.5.1(@svgr/core@6.5.1)
-      '@types/hapi__joi': 17.1.9
-      '@umijs/babel-preset-umi': 4.4.4
-      '@umijs/bundler-utils': 4.4.4
-      '@umijs/case-sensitive-paths-webpack-plugin': 1.0.1
-      '@umijs/mfsu': 4.4.4
-      '@umijs/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
-      '@umijs/utils': 4.4.4
-      cors: 2.8.5
-      css-loader: 6.7.1(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
-      es5-imcompatible-versions: 0.1.90
-      fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
       jest-worker: 29.4.3
       lightningcss: 1.22.1
       node-libs-browser: 2.2.1
@@ -11151,7 +11157,7 @@ snapshots:
     dependencies:
       tsx: 3.12.2
 
-  '@umijs/preset-umi@4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
+  '@umijs/preset-umi@4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
     dependencies:
       '@iconify/utils': 2.1.1
       '@svgr/core': 6.5.1
@@ -11161,7 +11167,7 @@ snapshots:
       '@umijs/bundler-mako': 0.11.1
       '@umijs/bundler-utils': 4.4.4
       '@umijs/bundler-vite': 4.4.4(@types/node@14.18.63)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)
-      '@umijs/bundler-webpack': 4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      '@umijs/bundler-webpack': 4.4.4(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/core': 4.4.4
       '@umijs/did-you-know': 1.0.3
       '@umijs/es-module-parser': 0.0.7
@@ -11209,65 +11215,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@umijs/preset-umi@4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))':
-    dependencies:
-      '@iconify/utils': 2.1.1
-      '@svgr/core': 6.5.1
-      '@umijs/ast': 4.4.4
-      '@umijs/babel-preset-umi': 4.4.4
-      '@umijs/bundler-esbuild': 4.4.4
-      '@umijs/bundler-mako': 0.11.1
-      '@umijs/bundler-utils': 4.4.4
-      '@umijs/bundler-vite': 4.4.4(@types/node@14.18.63)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)
-      '@umijs/bundler-webpack': 4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
-      '@umijs/core': 4.4.4
-      '@umijs/did-you-know': 1.0.3
-      '@umijs/es-module-parser': 0.0.7
-      '@umijs/history': 5.3.1
-      '@umijs/mfsu': 4.4.4
-      '@umijs/plugin-run': 4.4.4
-      '@umijs/renderer-react': 4.4.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@umijs/server': 4.4.4
-      '@umijs/ui': 3.0.1
-      '@umijs/utils': 4.4.4
-      '@umijs/zod2ts': 4.4.4
-      babel-plugin-dynamic-import-node: 2.3.3
-      babel-plugin-react-compiler: 0.0.0-experimental-c23de8d-20240515
-      click-to-react-component: 1.1.0(@types/react@19.0.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      core-js: 3.34.0
-      current-script-polyfill: 1.0.0
-      enhanced-resolve: 5.9.3
-      fast-glob: 3.2.12
-      html-webpack-plugin: 5.5.0(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
-      less-plugin-resolve: 1.0.2
-      path-to-regexp: 1.7.0
-      postcss: 8.4.49
-      postcss-prefix-selector: 1.16.0(postcss@8.4.49)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.3.0(react@18.3.1)
-      react-router-dom: 6.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      regenerator-runtime: 0.13.11
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@types/react'
-      - '@types/webpack'
-      - lightningcss
-      - rollup
-      - sass
-      - sockjs-client
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - type-fest
-      - typescript
-      - webpack
-      - webpack-dev-server
-      - webpack-hot-middleware
-      - webpack-plugin-serve
-
-  '@umijs/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
+  '@umijs/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))':
     dependencies:
       ansi-html-community: 0.0.8
       common-path-prefix: 3.0.0
@@ -11281,23 +11229,7 @@ snapshots:
       source-map: 0.7.4
       webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)
     optionalDependencies:
-      type-fest: 0.20.2
-
-  '@umijs/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))':
-    dependencies:
-      ansi-html-community: 0.0.8
-      common-path-prefix: 3.0.0
-      core-js-pure: 3.39.0
-      error-stack-parser: 2.1.4
-      find-up: 5.0.0
-      html-entities: 2.5.2
-      loader-utils: 2.0.4
-      react-refresh: 0.14.0
-      schema-utils: 3.3.0
-      source-map: 0.7.4
-      webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)
-    optionalDependencies:
-      type-fest: 0.20.2
+      type-fest: 4.31.0
 
   '@umijs/renderer-react@4.4.4(react-dom@17.0.2(react@17.0.2))(react@17.0.2)':
     dependencies:
@@ -11393,9 +11325,9 @@ snapshots:
       - moment
       - supports-color
 
-  '@vitdoc/runtime@1.6.3(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@vitdoc/runtime@1.6.4(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@vitdoc/ui': 1.6.2(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@vitdoc/ui': 1.7.0(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-router: 6.28.1(react@18.2.0)
@@ -11466,7 +11398,7 @@ snapshots:
       - moment
       - supports-color
 
-  '@vitdoc/ui@1.6.2(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@vitdoc/ui@1.7.0(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@ant-design/icons': 4.8.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       ahooks: 3.8.4(react@18.2.0)
@@ -12771,18 +12703,6 @@ snapshots:
       semver: 7.6.3
       webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)
 
-  css-loader@6.7.1(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.49)
-      postcss: 8.4.49
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.49)
-      postcss-modules-local-by-default: 4.2.0(postcss@8.4.49)
-      postcss-modules-scope: 3.2.1(postcss@8.4.49)
-      postcss-modules-values: 4.0.0(postcss@8.4.49)
-      postcss-value-parser: 4.2.0
-      semver: 7.6.3
-      webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)
-
   css-prefers-color-scheme@6.0.3(postcss@8.4.49):
     dependencies:
       postcss: 8.4.49
@@ -13068,7 +12988,7 @@ snapshots:
 
   dumi-assets-types@2.0.0-alpha.0: {}
 
-  dumi@2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
+  dumi@2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@ant-design/icons-svg': 4.4.2
       '@makotot/ghostui': 2.0.0(react@17.0.2)
@@ -13108,7 +13028,7 @@ snapshots:
       prism-react-renderer: 1.3.5(react@17.0.2)
       prism-themes: 1.9.0
       prismjs: 1.29.0
-      raw-loader: 4.0.2(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+      raw-loader: 4.0.2(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       rc-motion: 2.9.5(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       rc-tabs: 12.15.0(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       rc-tree: 5.12.4(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
@@ -13127,7 +13047,7 @@ snapshots:
       remark-rehype: 10.1.0
       sass: 1.83.0
       sitemap: 7.1.2
-      umi: 4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+      umi: 4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       unified: 10.1.2
       unist-util-visit: 4.1.2
       unist-util-visit-parents: 5.1.3
@@ -13165,7 +13085,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  dumi@2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
+  dumi@2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@ant-design/icons-svg': 4.4.2
       '@makotot/ghostui': 2.0.0(react@18.2.0)
@@ -13224,7 +13144,7 @@ snapshots:
       remark-rehype: 10.1.0
       sass: 1.83.0
       sitemap: 7.1.2
-      umi: 4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      umi: 4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       unified: 10.1.2
       unist-util-visit: 4.1.2
       unist-util-visit-parents: 5.1.3
@@ -14262,23 +14182,6 @@ snapshots:
       typescript: 5.7.2
       webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)
 
-  fork-ts-checker-webpack-plugin@8.0.0(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
-    dependencies:
-      '@babel/code-frame': 7.26.2
-      chalk: 4.1.2
-      chokidar: 3.6.0
-      cosmiconfig: 7.1.0
-      deepmerge: 4.3.1
-      fs-extra: 10.1.0
-      memfs: 3.5.3
-      minimatch: 3.1.2
-      node-abort-controller: 3.1.1
-      schema-utils: 3.3.0
-      semver: 7.6.3
-      tapable: 2.2.1
-      typescript: 5.7.2
-      webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)
-
   format@0.2.2: {}
 
   formatio@1.1.1:
@@ -14298,6 +14201,8 @@ snapshots:
       map-cache: 0.2.2
 
   fresh@0.5.2: {}
+
+  fresh@2.0.0: {}
 
   from2@2.3.0:
     dependencies:
@@ -14849,15 +14754,6 @@ snapshots:
       tapable: 2.2.1
       webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)
 
-  html-webpack-plugin@5.5.0(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
-    dependencies:
-      '@types/html-minifier-terser': 6.1.0
-      html-minifier-terser: 6.1.0
-      lodash: 4.17.21
-      pretty-error: 4.0.0
-      tapable: 2.2.1
-      webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)
-
   html2sketch@1.0.2:
     dependencies:
       '@sketch-hq/sketch-file-format-ts': 6.5.0
@@ -14967,6 +14863,24 @@ snapshots:
   ignore@5.3.2: {}
 
   image-color-utils@1.3.2:
+    dependencies:
+      '@babel/cli': 7.26.4(@babel/core@7.26.0)
+      '@babel/core': 7.26.0
+      '@babel/generator': 7.26.3
+      '@babel/helper-plugin-utils': 7.25.9
+      '@babel/parser': 7.26.3
+      '@babel/template': 7.25.9
+      '@babel/traverse': 7.26.4
+      '@babel/types': 7.26.3
+      promises-aplus-tests: 2.1.2
+      rollup-plugin-live-server: 1.0.3
+      rollup-plugin-livereload: 2.0.5
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
+  image-color-utils@1.3.3:
     dependencies:
       '@babel/cli': 7.26.4(@babel/core@7.26.0)
       '@babel/core': 7.26.0
@@ -15630,7 +15544,7 @@ snapshots:
       object-assign: 4.1.1
       opn: 6.0.0
       proxy-middleware: 0.15.0
-      send: 1.1.0
+      send: 1.2.0
       serve-index: 1.9.1
     transitivePeerDependencies:
       - supports-color
@@ -16329,9 +16243,15 @@ snapshots:
 
   mime-db@1.53.0: {}
 
+  mime-db@1.54.0: {}
+
   mime-types@2.1.35:
     dependencies:
       mime-db: 1.52.0
+
+  mime-types@3.0.1:
+    dependencies:
+      mime-db: 1.54.0
 
   mime@1.6.0: {}
 
@@ -17487,12 +17407,6 @@ snapshots:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
       webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)
-
-  raw-loader@4.0.2(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
-    dependencies:
-      loader-utils: 2.0.4
-      schema-utils: 3.3.0
-      webpack: 5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)
 
   rc-cascader@3.30.0(react-dom@17.0.2(react@17.0.2))(react@17.0.2):
     dependencies:
@@ -18952,16 +18866,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  send@1.1.0:
+  send@1.2.0:
     dependencies:
       debug: 4.4.0
-      destroy: 1.2.0
       encodeurl: 2.0.0
       escape-html: 1.0.3
       etag: 1.8.1
-      fresh: 0.5.2
+      fresh: 2.0.0
       http-errors: 2.0.0
-      mime-types: 2.1.35
+      mime-types: 3.0.1
       ms: 2.1.3
       on-finished: 2.4.1
       range-parser: 1.2.1
@@ -19746,6 +19659,9 @@ snapshots:
 
   type-fest@0.8.1: {}
 
+  type-fest@4.31.0:
+    optional: true
+
   type-is@1.6.18:
     dependencies:
       media-typer: 0.3.0
@@ -19803,14 +19719,14 @@ snapshots:
 
   uglify-to-browserify@1.0.2: {}
 
-  umi@4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
+  umi@4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@babel/runtime': 7.23.6
       '@umijs/bundler-utils': 4.4.4
-      '@umijs/bundler-webpack': 4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+      '@umijs/bundler-webpack': 4.4.4(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/core': 4.4.4
       '@umijs/lint': 4.4.4(eslint@8.57.1)(stylelint@14.16.1)(typescript@5.7.2)
-      '@umijs/preset-umi': 4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+      '@umijs/preset-umi': 4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/renderer-react': 4.4.4(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@umijs/server': 4.4.4
       '@umijs/test': 4.4.4(@babel/core@7.26.0)
@@ -19850,14 +19766,14 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  umi@4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
+  umi@4.4.4(@babel/core@7.26.0)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(sass@1.83.0)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@babel/runtime': 7.23.6
       '@umijs/bundler-utils': 4.4.4
-      '@umijs/bundler-webpack': 4.4.4(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      '@umijs/bundler-webpack': 4.4.4(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/core': 4.4.4
       '@umijs/lint': 4.4.4(eslint@8.57.1)(stylelint@14.16.1)(typescript@5.7.2)
-      '@umijs/preset-umi': 4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      '@umijs/preset-umi': 4.4.4(@types/node@14.18.63)(@types/react@19.0.0)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.83.0)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       '@umijs/renderer-react': 4.4.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@umijs/server': 4.4.4
       '@umijs/test': 4.4.4(@babel/core@7.26.0)
@@ -20162,19 +20078,19 @@ snapshots:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  vitdoc@1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.1.3)(lightningcss@1.22.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
+  vitdoc@1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.1.3)(lightningcss@1.22.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@manypkg/get-packages': 2.2.2
       '@types/node': 14.18.63
       '@umijs/bundler-utils': 4.4.4
       '@umijs/core': 4.4.4
       '@umijs/utils': 4.4.4
-      '@vitdoc/runtime': 1.6.3(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@vitdoc/theme-default': 2.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@vitdoc/ui': 1.6.2(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@vitdoc/runtime': 1.6.3(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@vitdoc/theme-default': 2.2.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@vitdoc/ui': 1.6.2(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@vitejs/plugin-react-swc': 3.7.2(@swc/helpers@0.5.1)(vite@5.4.11(@types/node@14.18.63)(less@4.1.3)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0))
       chalk: 4.1.2
-      dumi: 2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
+      dumi: 2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       esbuild: 0.14.54
       esbuild-register: 3.6.0(esbuild@0.14.54)
       esbuild-resolve-config: 1.0.9
@@ -20187,8 +20103,8 @@ snapshots:
       lodash-es: 4.17.21
       mlly: 1.7.3
       prettier: 2.8.8
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
       remark-frontmatter: 4.0.1
       remark-parse: 10.0.2
       resolve-ts-alias: 1.0.9
@@ -20243,19 +20159,19 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  vitdoc@1.8.10(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.2.1)(lightningcss@1.22.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0)):
+  vitdoc@1.8.12(@babel/core@7.26.0)(@babel/template@7.25.9)(@swc/helpers@0.5.1)(@types/react@19.0.0)(eslint@8.57.1)(less@4.2.1)(lightningcss@1.22.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54)):
     dependencies:
       '@manypkg/get-packages': 2.2.2
       '@types/node': 14.18.63
       '@umijs/bundler-utils': 4.4.4
       '@umijs/core': 4.4.4
       '@umijs/utils': 4.4.4
-      '@vitdoc/runtime': 1.6.3(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
-      '@vitdoc/theme-default': 2.2.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
-      '@vitdoc/ui': 1.6.2(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@vitdoc/runtime': 1.6.4(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@vitdoc/theme-default': 2.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@vitdoc/ui': 1.7.0(@babel/core@7.26.0)(@babel/template@7.25.9)(@types/react@19.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@vitejs/plugin-react-swc': 3.7.2(@swc/helpers@0.5.1)(vite@5.4.11(@types/node@14.18.63)(less@4.2.1)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0))
       chalk: 4.1.2
-      dumi: 2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.24.0))
+      dumi: 2.2.17(@babel/core@7.26.0)(@swc/helpers@0.5.1)(@types/node@14.18.63)(@types/react@19.0.0)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@4.31.0)(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.10.4(@swc/helpers@0.5.1))(esbuild@0.14.54))
       esbuild: 0.14.54
       esbuild-register: 3.6.0(esbuild@0.14.54)
       esbuild-resolve-config: 1.0.9
@@ -20268,8 +20184,8 @@ snapshots:
       lodash-es: 4.17.21
       mlly: 1.7.3
       prettier: 2.8.8
-      react: 17.0.2
-      react-dom: 17.0.2(react@17.0.2)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
       remark-frontmatter: 4.0.1
       remark-parse: 10.0.2
       resolve-ts-alias: 1.0.9
@@ -20324,12 +20240,12 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  vite-plugin-package-alias@0.0.1-beta.3(@types/node@14.18.63)(less@4.1.3)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0):
+  vite-plugin-package-alias@0.0.1(@types/node@14.18.63)(less@4.2.1)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0):
     dependencies:
       consola: 3.3.3
       fs-extra: 11.2.0
       glob: 10.4.5
-      vite: 5.4.11(@types/node@14.18.63)(less@4.1.3)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0)
+      vite: 5.4.11(@types/node@14.18.63)(less@4.2.1)(lightningcss@1.22.1)(sass@1.83.0)(terser@5.37.0)
     transitivePeerDependencies:
       - '@types/node'
       - less

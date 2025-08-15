@@ -446,53 +446,6 @@ const getMainColor = (img, range = [0, 100], axis = "x") => {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/image-color-utils@1.3.2/node_modules/image-color-utils/build/index.es.js
-(function(l, r) {
-	if (!l || l.getElementById("livereloadscript")) return;
-	r = l.createElement("script");
-	r.async = 1;
-	r.src = "//" + (self.location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=1";
-	r.id = "livereloadscript";
-	l.getElementsByTagName("head")[0].appendChild(r);
-})(self.document);
-function rgb2hsv(rgb) {
-	let [r, g, b] = rgb;
-	r /= 255;
-	g /= 255;
-	b /= 255;
-	let max = Math.max(r, g, b), min = Math.min(r, g, b);
-	let h, s, v = max;
-	let d = max - min;
-	s = max === 0 ? 0 : d / max;
-	if (max === min) h = 0;
-else {
-		switch (max) {
-			case r:
-				h = (g - b) / d + (g < b ? 6 : 0);
-				break;
-			case g:
-				h = (b - r) / d + 2;
-				break;
-			case b:
-				h = (r - g) / d + 4;
-				break;
-		}
-		h /= 6;
-	}
-	return [
-		h * 360,
-		s * 100,
-		v * 100
-	];
-}
-function isDeepColorByHsv(hsv) {
-	const v = hsv[2];
-	const s = hsv[1];
-	console.log(hsv);
-	return v <= 60 || s > 40;
-}
-
-//#endregion
 //#region ../../node_modules/.pnpm/react@18.2.0/node_modules/react/cjs/react.development.js
 var require_react_development = __commonJS({ "../../node_modules/.pnpm/react@18.2.0/node_modules/react/cjs/react.development.js"(exports, module) {
 	(function() {
@@ -947,8 +900,8 @@ else if (childrenLength > 1) {
 				props.children = childArray;
 			}
 			if (type && type.defaultProps) {
-				var defaultProps = type.defaultProps;
-				for (propName in defaultProps) if (props[propName] === undefined) props[propName] = defaultProps[propName];
+				var defaultProps$1 = type.defaultProps;
+				for (propName in defaultProps$1) if (props[propName] === undefined) props[propName] = defaultProps$1[propName];
 			}
 			if (key || ref) {
 				var displayName = typeof type === "function" ? type.displayName || type.name || "Unknown" : type;
@@ -983,9 +936,9 @@ else if (childrenLength > 1) {
 					checkKeyStringCoercion(config.key);
 					key = "" + config.key;
 				}
-				var defaultProps;
-				if (element.type && element.type.defaultProps) defaultProps = element.type.defaultProps;
-				for (propName in config) if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) if (config[propName] === undefined && defaultProps !== undefined) props[propName] = defaultProps[propName];
+				var defaultProps$1;
+				if (element.type && element.type.defaultProps) defaultProps$1 = element.type.defaultProps;
+				for (propName in config) if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) if (config[propName] === undefined && defaultProps$1 !== undefined) props[propName] = defaultProps$1[propName];
 else props[propName] = config[propName];
 			}
 			var childrenLength = arguments.length - 2;
@@ -1335,17 +1288,17 @@ else {
 				_init: lazyInitializer
 			};
 			{
-				var defaultProps;
+				var defaultProps$1;
 				var propTypes;
 				Object.defineProperties(lazyType, {
 					defaultProps: {
 						configurable: true,
 						get: function() {
-							return defaultProps;
+							return defaultProps$1;
 						},
 						set: function(newDefaultProps) {
 							error("React.lazy(...): It is not supported to assign `defaultProps` to a lazy component import. Either specify them where the component is defined, or create a wrapping component around it.");
-							defaultProps = newDefaultProps;
+							defaultProps$1 = newDefaultProps;
 							Object.defineProperty(lazyType, "defaultProps", { enumerable: true });
 						}
 					},
@@ -1403,7 +1356,7 @@ else if (render.length !== 0 && render.length !== 2) error("forwardRef render fu
 			}
 			return false;
 		}
-		function memo(type, compare) {
+		function memo$1(type, compare) {
 			if (!isValidElementType(type)) error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
 			var elementType = {
 				$$typeof: REACT_MEMO_TYPE,
@@ -2096,7 +2049,7 @@ else resolve(returnValue);
 		exports.forwardRef = forwardRef;
 		exports.isValidElement = isValidElement;
 		exports.lazy = lazy;
-		exports.memo = memo;
+		exports.memo = memo$1;
 		exports.startTransition = startTransition;
 		exports.unstable_act = act;
 		exports.useCallback = useCallback$1;
@@ -2126,25 +2079,46 @@ var require_react = __commonJS({ "../../node_modules/.pnpm/react@18.2.0/node_mod
 } });
 
 //#endregion
-//#region src/banner.tsx
-var import_react = __toESM(require_react());
-const offsetValues = [
-	2,
-	20,
-	120
-];
-const filterWidth = 50;
-const filterOffset = filterWidth / 2;
-const getFinalColor = (rgb) => {
-	if (!rgb) return "#fff";
-	const rgbArr = rgb.split(",");
-	const hsl = rgb2hsv([
-		parseInt(rgbArr[0]),
-		parseInt(rgbArr[1]),
-		parseInt(rgbArr[2])
-	]);
-	return isDeepColorByHsv(hsl) ? "#000" : "#fff";
-};
+//#region ../../node_modules/.pnpm/image-color-utils@1.3.5/node_modules/image-color-utils/build/index.es.js
+function rgb2hsv(rgb) {
+	let [r, g, b] = rgb;
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	let max = Math.max(r, g, b), min = Math.min(r, g, b);
+	let h, s, v = max;
+	let d = max - min;
+	s = max === 0 ? 0 : d / max;
+	if (max === min) h = 0;
+else {
+		switch (max) {
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
+			case g:
+				h = (b - r) / d + 2;
+				break;
+			case b:
+				h = (r - g) / d + 4;
+				break;
+		}
+		h /= 6;
+	}
+	return [
+		h * 360,
+		s * 100,
+		v * 100
+	];
+}
+function isDeepColorByHsv(hsv) {
+	const v = hsv[2];
+	const s = hsv[1];
+	console.log(hsv);
+	return v <= 60 || s > 40;
+}
+
+//#endregion
+//#region src/utils.ts
 const debounce = (fn, delay) => {
 	let timer;
 	return function(...args) {
@@ -2154,61 +2128,81 @@ const debounce = (fn, delay) => {
 		}, delay);
 	};
 };
+const getFinalColor = (rgb) => {
+	if (!rgb) return "#fff";
+	const rgbArr = rgb.split(",");
+	const hsl = rgb2hsv([
+		Number.parseInt(rgbArr[0]),
+		Number.parseInt(rgbArr[1]),
+		Number.parseInt(rgbArr[2])
+	]);
+	return isDeepColorByHsv(hsl) ? "#000" : "#fff";
+};
+const getCoverInfoCache = (img) => {
+	const cacheKey = `alife/better-banner${img}`;
+	const cache = localStorage.getItem(cacheKey);
+	return cache ? JSON.parse(cache) : null;
+};
+const setCoverInfoCache = (img, coverInfo) => {
+	const cacheKey = `alife/better-banner${img}`;
+	localStorage.setItem(cacheKey, JSON.stringify(coverInfo));
+};
+
+//#endregion
+//#region src/banner.tsx
+var import_react = __toESM(require_react());
+const offsetValues = [
+	2,
+	20,
+	120
+];
+const filterWidth = 50;
+const filterOffset = filterWidth / 2;
+const defaultProps = {
+	width: "100%",
+	height: "100%",
+	backgroundPosition: "center",
+	range: [1, 20]
+};
 function ResponsiveBanner(props) {
-	var _a, _b, _c, _d, _e, _f;
-	const { width = "100%", height = "100%", img, backgroundPosition = "center", style, className } = props;
+	const { width = defaultProps.width, height = defaultProps.height, img, backgroundPosition = defaultProps.backgroundPosition, style, className, alt, range = defaultProps.range, children, presetCoverInfo } = props;
 	const conRef = (0, import_react.useRef)(null);
 	const [mounted, setMounted] = (0, import_react.useState)(0);
 	const bannerWidth = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		return !mounted ? 0 : width === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetWidth) || 0 : width;
-	}, [
-		width,
-		conRef,
-		mounted
-	]);
+		var _a, _b;
+		return !mounted ? 0 : width === "100%" ? ((_b = (_a = conRef.current) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.offsetWidth) || 0 : width;
+	}, [width, mounted]);
 	const bannerHeight = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		return !mounted ? 0 : height === "100%" ? ((_b$1 = (_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) === null || _b$1 === void 0 ? void 0 : _b$1.offsetHeight) || 0 : height;
-	}, [
-		height,
-		conRef,
-		mounted
-	]);
+		var _a, _b;
+		return !mounted ? 0 : height === "100%" ? ((_b = (_a = conRef.current) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.offsetHeight) || 0 : height;
+	}, [height, mounted]);
 	const [coverInfo, setCoverInfo] = (0, import_react.useState)({
 		left: "",
 		right: "",
 		bottom: "",
-		top: ""
+		top: "",
+		imageWidth: 0,
+		imageHeight: 0
 	});
-	const isAdaptY = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1, _d$1;
-		return !!(((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) && ((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) && ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width) / bannerWidth > ((_d$1 = coverInfo.image) === null || _d$1 === void 0 ? void 0 : _d$1.height) / bannerHeight);
-	}, [
-		(_a = coverInfo.image) === null || _a === void 0 ? void 0 : _a.width,
-		(_b = coverInfo.image) === null || _b === void 0 ? void 0 : _b.height,
+	const isAdaptY = (0, import_react.useMemo)(() => !!(coverInfo.imageWidth && coverInfo.imageHeight && coverInfo.imageWidth / bannerWidth > coverInfo.imageHeight / bannerHeight), [
+		coverInfo.imageWidth,
+		coverInfo.imageHeight,
 		bannerWidth,
 		bannerHeight
 	]);
-	const renderedCoverWidth = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1;
-		return isAdaptY || !((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) ? bannerWidth : Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.width) * bannerHeight / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.height));
-	}, [
+	const renderedCoverWidth = (0, import_react.useMemo)(() => isAdaptY || !coverInfo.imageWidth ? bannerWidth : Math.floor(coverInfo.imageWidth * bannerHeight / coverInfo.imageHeight), [
 		isAdaptY,
-		(_c = coverInfo.image) === null || _c === void 0 ? void 0 : _c.width,
-		(_d = coverInfo.image) === null || _d === void 0 ? void 0 : _d.height,
 		bannerWidth,
-		bannerHeight
+		bannerHeight,
+		coverInfo.imageWidth,
+		coverInfo.imageHeight
 	]);
-	const renderedCoverHeight = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1, _c$1;
-		return isAdaptY && ((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.height) ? Math.floor(((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height) * bannerWidth / ((_c$1 = coverInfo.image) === null || _c$1 === void 0 ? void 0 : _c$1.width)) : bannerHeight;
-	}, [
+	const renderedCoverHeight = (0, import_react.useMemo)(() => isAdaptY && coverInfo.imageHeight ? Math.floor(coverInfo.imageHeight * bannerWidth / coverInfo.imageWidth) : bannerHeight, [
 		isAdaptY,
-		(_e = coverInfo.image) === null || _e === void 0 ? void 0 : _e.width,
-		(_f = coverInfo.image) === null || _f === void 0 ? void 0 : _f.height,
 		bannerWidth,
-		bannerHeight
+		bannerHeight,
+		coverInfo.imageWidth,
+		coverInfo.imageHeight
 	]);
 	const gapLength = (0, import_react.useMemo)(() => backgroundPosition === "center" || ["top", "bottom"].includes(backgroundPosition) && !isAdaptY || ["left", "right"].includes(backgroundPosition) && isAdaptY ? 2 : 1, [backgroundPosition, isAdaptY]);
 	const gapWidth = (0, import_react.useMemo)(() => Math.ceil(renderedCoverWidth && (bannerWidth - renderedCoverWidth) / gapLength), [
@@ -2303,19 +2297,20 @@ function ResponsiveBanner(props) {
 		gapHeight
 	]);
 	const backgroundImage = (0, import_react.useMemo)(() => {
-		var _a$1, _b$1;
-		if (!((_a$1 = coverInfo.image) === null || _a$1 === void 0 ? void 0 : _a$1.width) || !((_b$1 = coverInfo.image) === null || _b$1 === void 0 ? void 0 : _b$1.height)) return "";
+		if (!coverInfo.imageWidth || !coverInfo.imageHeight) return "";
 		const leftGradientValues = getLeftGradientValues();
 		const rightGradientValues = getRightGradientValues();
 		const topGradientValues = getTopGradientValues();
 		const bottomGradientValues = getBottomGradientValues();
 		const generateLinearGradient = ({ isVertical, startGradientValues, endGradientValues, startRGB, endRGB }) => {
-			let startColor, endColor;
+			let startColor = "";
+			let endColor = "";
+			const basic = isVertical ? bannerHeight : bannerWidth;
 			if (startGradientValues && endGradientValues && startRGB && endRGB) {
-				startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
-				endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
-			} else if (startGradientValues && startRGB) startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.45) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
-else if (endGradientValues && endRGB) startColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.45) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${bannerWidth + 100}px`;
+				startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${startGradientValues[2] < endGradientValues[2] ? startGradientValues[2] : endGradientValues[2]}px`;
+				endColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${endGradientValues[1]}px, rgb(${endRGB}) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${basic + 100}px`;
+			} else if (startGradientValues && startRGB) startColor = `${getFinalColor(startRGB)} -100px, rgb(${startRGB}) ${startGradientValues[0]}px, rgba(${startRGB}, 0.1) ${startGradientValues[1]}px, transparent ${startGradientValues[2]}px`;
+else if (endGradientValues && endRGB) startColor = `transparent ${endGradientValues[0]}px, rgba(${endRGB}, 0.1) ${endGradientValues[1]}px,rgba(${endRGB},1) ${endGradientValues[2]}px, ${getFinalColor(endRGB)} ${basic + 100}px`;
 			return `linear-gradient(${isVertical ? "180deg" : "90deg"} ${startColor ? `,${startColor}` : ""} ${endColor ? `,${endColor}` : ""}), url(${img})`;
 		};
 		return generateLinearGradient(Object.assign(Object.assign({ isVertical: isAdaptY }, ([
@@ -2356,50 +2351,57 @@ else if (endGradientValues && endRGB) startColor = `transparent ${endGradientVal
 		backgroundRepeat: "no-repeat"
 	}, style);
 	const initCover = (0, import_react.useCallback)(() => {
-		getMainColor(img, [1, 40]).then((res) => {
+		getMainColor(img, range).then((res) => {
 			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
 				left: res.color,
-				image: res.image
+				imageHeight: res.image.height,
+				imageWidth: res.image.width
 			}));
 		});
-		getMainColor(img, [-40, -1]).then((res) => {
+		getMainColor(img, [-range[1], -range[0]]).then((res) => {
 			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
 				right: res.color,
-				image: res.image
+				imageHeight: res.image.height,
+				imageWidth: res.image.width
 			}));
 		});
-		getMainColor(img, [-40, -1], "y").then((res) => {
+		getMainColor(img, [-range[1], -range[0]], "y").then((res) => {
 			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
 				bottom: res.color,
-				image: res.image
+				imageHeight: res.image.height,
+				imageWidth: res.image.width
 			}));
 		});
-		getMainColor(img, [1, 40], "y").then((res) => {
+		getMainColor(img, range, "y").then((res) => {
 			setCoverInfo((origin) => Object.assign(Object.assign({}, origin), {
 				top: res.color,
-				image: res.image
+				imageHeight: res.image.height,
+				imageWidth: res.image.width
 			}));
 		});
-	}, [img]);
+	}, [img, range]);
 	(0, import_react.useEffect)(() => {
-		initCover();
+		const run = () => {
+			!presetCoverInfo && initCover();
+		};
+		run();
 		const fn = debounce(() => {
 			setMounted((origin) => origin + 1);
-			initCover();
-		}, 30);
+			run();
+		}, 50);
 		window.addEventListener("resize", fn);
 		return () => {
 			window.removeEventListener("resize", fn);
 		};
-	}, [initCover]);
+	}, [initCover, presetCoverInfo]);
 	const getTop = (position) => {
 		if (position === "top") return isAdaptY ? gapHeight - filterOffset : 0;
-else if (position === "bottom") return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset : renderedCoverHeight - filterOffset : 0;
+		if (position === "bottom") return isAdaptY ? gapLength > 1 ? bannerHeight - gapHeight - filterOffset : renderedCoverHeight - filterOffset : 0;
 		return 0;
 	};
 	const getLeft = (position) => {
 		if (position === "left") return isAdaptY ? 0 : gapWidth - filterOffset;
-else if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - filterOffset;
+		if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - filterOffset;
 		return 0;
 	};
 	const getFilterStyle = (position) => {
@@ -2416,21 +2418,45 @@ else if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - fi
 		};
 	};
 	(0, import_react.useLayoutEffect)(() => {
-		var _a$1;
+		var _a;
 		setMounted((origin) => origin + 1);
 		const observer = new ResizeObserver(() => {
 			setMounted((origin) => origin + 1);
 		});
-		((_a$1 = conRef.current) === null || _a$1 === void 0 ? void 0 : _a$1.parentElement) && observer.observe(conRef.current.parentElement);
+		((_a = conRef.current) === null || _a === void 0 ? void 0 : _a.parentElement) && observer.observe(conRef.current.parentElement);
 		return () => {
 			observer.disconnect();
 		};
 	}, []);
+	(0, import_react.useEffect)(() => {
+		var _a, _b;
+		const cache = getCoverInfoCache(img);
+		if (presetCoverInfo) setCoverInfo(Object.assign(Object.assign({}, presetCoverInfo), {
+			imageHeight: (_a = presetCoverInfo.image) === null || _a === void 0 ? void 0 : _a.height,
+			imageWidth: (_b = presetCoverInfo.image) === null || _b === void 0 ? void 0 : _b.width
+		}));
+else if (cache) setCoverInfo(cache);
+	}, [presetCoverInfo, img]);
+	const imgStyle = {
+		width: renderedCoverWidth,
+		height: renderedCoverHeight,
+		position: "absolute",
+		zIndex: -1,
+		left: -document.documentElement.clientWidth,
+		top: -document.documentElement.clientHeight
+	};
+	(0, import_react.useEffect)(() => {
+		coverInfo && setCoverInfoCache(img, coverInfo);
+	}, [coverInfo, img]);
 	return import_react.default.createElement("div", {
 		ref: conRef,
 		style: containerStyle,
 		className
-	}, applyDynamicBg && import_react.default.createElement(import_react.default.Fragment, null, [
+	}, img && import_react.default.createElement("img", {
+		src: img,
+		alt: alt || "Banner",
+		style: imgStyle
+	}), applyDynamicBg && import_react.default.createElement(import_react.default.Fragment, null, [
 		"right",
 		"center",
 		"top",
@@ -2450,12 +2476,13 @@ else if (position === "right") return isAdaptY ? 0 : bannerWidth - gapWidth - fi
 		"center",
 		"left",
 		"right"
-	].includes(backgroundPosition) && isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("bottom") })));
+	].includes(backgroundPosition) && isAdaptY && import_react.default.createElement("span", { style: getFilterStyle("bottom") })), children);
 }
+var banner_default = (0, import_react.memo)(ResponsiveBanner);
 
 //#endregion
 //#region src/index.ts
-var src_default = ResponsiveBanner;
+var src_default = banner_default;
 
 //#endregion
 export { src_default as default };
